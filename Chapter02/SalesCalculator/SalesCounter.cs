@@ -11,8 +11,8 @@ namespace SalesCalculator {
         private List<Sale> _sales;//csvファイルから読み込んだでーた
 
         //コンストラクタ
-        public SalesCounter(List<Sale> sales) {
-            _sales = sales;
+        public SalesCounter(string filePath) {
+            _sales = ReadSales(filePath);
         }
 
         //店舗別売り上げを求める
