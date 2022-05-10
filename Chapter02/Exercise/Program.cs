@@ -20,7 +20,7 @@ namespace Exercise {
         }
 
         //2.1.4
-        private static void PrintSongs(Song[] songs) {
+        private static void PrintSongs(IEnumerable<Song> songs) {
 
             foreach(var song in songs) {
                 Console.WriteLine("{0},{1},{2:m\\:ss}", song.Title, song.ArtiseName, TimeSpan.FromSeconds(song.Length));
