@@ -69,7 +69,7 @@ namespace Exercise02 {
 
         private static void Exercise2_4(YearMonth[] ymCollection) {
 
-           var yearmounth =  FindFirst21C(ymCollection);
+            var yearmounth = FindFirst21C(ymCollection);
 
             if (yearmounth != null) {
                 Console.WriteLine(yearmounth);
@@ -87,10 +87,16 @@ namespace Exercise02 {
             }
         }
         private static void Exercise2_6(YearMonth[] ymCollection) {
+            //①月で昇順に出力　②偶数年のみ昇順に出力 ③うるう年のみ出力 ④すべての年から12月に一番近い月を出力
+            //foreach (var ym in ymCollection.Where(ym => ym.Year % 2 == 0 ).OrderBy(ym =>ym.Month)) {
 
-            foreach (var ym in ymCollection.OrderByDescending(ym => ym.Year)) {
+            /* 閏年*/
+            foreach (var ym in ymCollection.Where(ym => DateTime.IsLeapYear(ym.Year ))){
                 Console.WriteLine(ym);
-            }  
+            }
+            //④
+            var data = ymCollection.Max(ym => ym.Month);
+            Console.WriteLine(data);
         }
     }
 }
