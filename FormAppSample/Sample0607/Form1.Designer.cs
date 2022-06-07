@@ -1,6 +1,6 @@
 ﻿
 namespace Sample0607 {
-    partial class 計算アプリ {
+    partial class Form1 {
         /// <summary>
         /// 必要なデザイナー変数です。
         /// </summary>
@@ -111,7 +111,7 @@ namespace Sample0607 {
             this.udMod.Size = new System.Drawing.Size(100, 44);
             this.udMod.TabIndex = 3;
             // 
-            // 計算アプリ
+            // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -125,8 +125,8 @@ namespace Sample0607 {
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Name = "計算アプリ";
-            this.Text = "Form1";
+            this.Name = "Form1";
+            this.Text = "計算アプリ";
             this.Load += new System.EventHandler(this.計算アプリ_Load);
             ((System.ComponentModel.ISupportInitialize)(this.udNum1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udNum2)).EndInit();

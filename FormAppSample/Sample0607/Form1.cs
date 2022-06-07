@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Sample0607 {
-    public partial class 計算アプリ : Form {
-        public 計算アプリ() {
+    public partial class Form1 : Form {
+        public Form1() {
             InitializeComponent();
         }
 
