@@ -10,16 +10,14 @@ using System.Windows.Forms;
 
 namespace Sample0607 {
     public partial class Form1 : Form {
+
+        Random rand = new Random();
         public Form1() {
             InitializeComponent();
         }
         private void btRondom_Click(object sender, EventArgs e) {
 
-           var r = new Random();
-
-            number.Value = r.Next(6);
-
-            
+            number.Value = rand.Next(minValue:1,maxValue:7);
         }
     }
 }
