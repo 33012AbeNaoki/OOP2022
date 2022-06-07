@@ -13,25 +13,13 @@ namespace Sample0607 {
         public Form1() {
             InitializeComponent();
         }
+        private void btRondom_Click(object sender, EventArgs e) {
 
-        private void button1_Click(object sender, EventArgs e) {
+           var r = new Random();
 
-            if (int.Parse(udNum2.Text) != 0) {
-                //tbAns.Text = (int.Parse(tbNum1.Text) / int.Parse(tbNum2.Text)).ToString();
-                //tbMod.Text = (int.Parse(tbNum1.Text) % int.Parse(tbNum2.Text)).ToString();
-                udAns.Value = udNum1.Value / udNum2.Value;
-                udMod.Value = udNum1.Value % udNum2.Value;
-            }
-            else {
-                MessageBox.Show("0で割り算はできません。",
-                 "エラー",
-                 MessageBoxButtons.OK,
-                 MessageBoxIcon.Error);
-            }
-        }
+            number.Value = r.Next(6);
 
-        private void 計算アプリ_Load(object sender, EventArgs e) {
-
+            
         }
     }
 }
