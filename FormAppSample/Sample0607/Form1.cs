@@ -20,7 +20,7 @@ namespace Sample0607 {
 
             //number.Value = rand.Next(minValue:1,maxValue:7); 1～6の乱数
 
-            number.Value = rand.Next(minValue:(int)udMin.Value,maxValue:(int)udMax.Value);
+            number.Value = rand.Next(minValue: (int)udMin.Value, maxValue: (int)udMax.Value + 1);
         }
         //イベントハンドラ（起動時に一度だけ実行）
         private void Form_Loand(object sender, EventArgs e) { 
