@@ -73,6 +73,8 @@ namespace AddressBook {
         //データグリッドビューをクリックしたときのイベントハンドラ
         private void dgvPersons_Click(object sender, EventArgs e) {
 
+            if (dgvPersons.CurrentRow == null) return;
+
             int index = dgvPersons.CurrentRow.Index;
             //例
             //データグリッドビューのインデックス〇番目の名前をテキストボックスに格納
@@ -82,7 +84,7 @@ namespace AddressBook {
             tbCompany.Text = listPerson[index].Company;
             pbPicture.Image = listPerson[index].Picture;
 
-            groupCheckBoxAllClear();
+            groupCheckBoxAllClear();//グループチェックボックスを初期化
 
             foreach (var group in listPerson[index].listGroup) {
 
