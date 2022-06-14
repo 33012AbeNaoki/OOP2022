@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Activities.Expressions;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -42,7 +43,13 @@ namespace AddressBook {
             };
 
             listPerson.Add(newPerson);
+            dgvPersons.Rows[dgvPersons.RowCount - 1].Selected = true;
 
+            if (listPerson.Count() >0) {
+                btDelete.Enabled = true;
+                btUpdate.Enabled = true;
+
+            }
         }
 
         //チェックボックスにセットされている値をリストとして取り出す
@@ -112,6 +119,40 @@ namespace AddressBook {
         private void groupCheckBoxAllClear() {
             cbFamily.Checked = cbFriend.Checked = cbWork.Checked = cbOther.Checked = false;
         }
+
+        //更新ボタンが押された時の処理
+        private void btUpdate_Click(object sender, EventArgs e) {
+
+            listPerson[dgvPersons.CurrentRow.Index].Name = tbName.Text;
+            listPerson[dgvPersons.CurrentRow.Index].MailAddress = tbMailAddress.Text;
+            listPerson[dgvPersons.CurrentRow.Index].Address = tbAddress.Text;
+            listPerson[dgvPersons.CurrentRow.Index].Company = tbCompany.Text;
+            listPerson[dgvPersons.CurrentRow.Index].listGroup = GetCheckBoxGroup();
+            listPerson[dgvPersons.CurrentRow.Index].Picture = pbPicture.Image;
+
+            dgvPersons.Refresh();//データグリッドビュー更新
+        }
+
+        private void btDelete_Click(object sender, EventArgs e) {
+             listPerson.RemoveAt(dgvPersons.CurrentRow.Index);
+
+            if (listPerson.Count() == 0) {
+                btDelete.Enabled = false;
+                btUpdate.Enabled = false;
+            }
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e) {
+
+          
+            btDelete.Enabled = false;
+            btUpdate.Enabled = false;
+
+
+        }
+
     }
-         
- }
+}
+
+
