@@ -3,7 +3,7 @@ using System.IO;
 
 namespace Test01 {
     class ScoreCounter {
-        private IEnumerable<Student> _score;
+        private IEnumerable<Student> _score;//ファイルから読み込んだデータ
 
         // コンストラクタ
         public ScoreCounter(string filePath) {
@@ -12,9 +12,22 @@ namespace Test01 {
         }
 
 
-        //メソッドの概要： 
+        //メソッドの概要： スコアデータを読み込み、scoreオブジェクトのリストを返す
         private static IEnumerable<Student> ReadScore(string filePath) {
 
+            List<Student> scores = new List<Student>();
+            string[] lines = File.ReadAllLines(filePath);
+            foreach (string line in lines) {
+                string[] items = line.Split(',');
+                Student score = new Student {
+
+                    Name = items[0],
+                    Subject = items[1],
+                    Score = int.Parse(items[2]),
+                };
+                scores.Add(score);
+            }
+            return scores;
     
 
 
@@ -23,7 +36,7 @@ namespace Test01 {
 
         }
 
-        //メソッドの概要： 
+        //メソッドの概要： 科目別の点数を求める
         public IDictionary<string, int> GetPerStudentScore() {
 
             var dict = new Dictionary<string, int>();
@@ -37,6 +50,7 @@ namespace Test01 {
                 }
 
             }
+            return dict;
 
 
 
