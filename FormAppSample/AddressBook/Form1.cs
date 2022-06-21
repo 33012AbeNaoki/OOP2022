@@ -34,6 +34,7 @@ namespace AddressBook {
         }
         private void btAddPerson_Click(object sender, EventArgs e) {
 
+           
             //氏名が未入力なら登録しない
             if (String.IsNullOrWhiteSpace(tbName.Text)) {
                 MessageBox.Show("氏名が入力されていません");
@@ -46,11 +47,13 @@ namespace AddressBook {
                 MailAddress = tbMailAddress.Text,
                 Address = tbAddress.Text,
                 Company = cbCompany.Text,
+                Registration =dtpTimePicker.Value,
                 Picture = pbPicture.Image,
                 listGroup = GetCheckBoxGroup(),
             };
 
             listPerson.Add(newPerson);
+          
             dgvPersons.Rows[dgvPersons.RowCount - 1].Selected = true;
 
             //if (listPerson.Count() > 0) {
@@ -112,6 +115,9 @@ namespace AddressBook {
             cbCompany.Text = listPerson[index].Company;
             pbPicture.Image = listPerson[index].Picture;
 
+            dtpTimePicker.Value = listPerson[index].Registration.Year > 1900 ?
+                listPerson[index].Registration : DateTime.Today;
+
             groupCheckBoxAllClear();//グループチェックボックスを初期化
 
             foreach (var group in listPerson[index].listGroup) {
@@ -150,6 +156,7 @@ namespace AddressBook {
             listPerson[dgvPersons.CurrentRow.Index].Company = cbCompany.Text;
             listPerson[dgvPersons.CurrentRow.Index].listGroup = GetCheckBoxGroup();
             listPerson[dgvPersons.CurrentRow.Index].Picture = pbPicture.Image;
+            listPerson[dgvPersons.CurrentRow.Index].Registration = dtpTimePicker.Value;
 
             dgvPersons.Refresh();//データグリッドビュー更新
         }
@@ -208,7 +215,7 @@ namespace AddressBook {
 
         private void btOpen_Click(object sender, EventArgs e) {
 
-            cbCompany.Items.Clear();
+            
 
             if (ofdFileOpenDaiarog.ShowDialog() == DialogResult.OK) {
                 try {
@@ -227,6 +234,7 @@ namespace AddressBook {
                 catch (Exception ex) {
                     MessageBox.Show(ex.Message);
                 }
+                cbCompany.Items.Clear();//コンボボックスのアイテム削除
                 //コンボボックス登録
                 foreach (var item in listPerson.Select(p => p.Company)) {
                     
@@ -235,6 +243,8 @@ namespace AddressBook {
             }
             EnabledCheck();
         }
+
+       
     }
 }
 
