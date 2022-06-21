@@ -65,7 +65,7 @@ namespace AddressBook {
         }
         //コンボボックスに会社名を登録する（重複なし）
         private void setDbCompany(string company){
-            
+
             if (!cbCompany.Items.Contains(company)) {
 
                 //まだ登録されていなければ登録処理
@@ -208,6 +208,8 @@ namespace AddressBook {
 
         private void btOpen_Click(object sender, EventArgs e) {
 
+            cbCompany.Items.Clear();
+
             if (ofdFileOpenDaiarog.ShowDialog() == DialogResult.OK) {
                 try {
 
@@ -225,8 +227,9 @@ namespace AddressBook {
                 catch (Exception ex) {
                     MessageBox.Show(ex.Message);
                 }
-                foreach (var item in listPerson.Select(p => p.Company)) { 
-
+                //コンボボックス登録
+                foreach (var item in listPerson.Select(p => p.Company)) {
+                    
                     setDbCompany(item);//存在する会社を登録
                 }
             }
