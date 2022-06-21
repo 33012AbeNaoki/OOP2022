@@ -157,25 +157,27 @@ namespace AddressBook {
         private void btDelete_Click(object sender, EventArgs e) {
             listPerson.RemoveAt(dgvPersons.CurrentRow.Index);
 
-            if (listPerson.Count() == 0) {
                 EnabledCheck();//マスク処理呼び出し
-            }
+            
 
         }
 
         //更新・削除ボタンのマスク解除、設定を行う（マスク判定を含む）
         private void EnabledCheck() {
 
-            if (listPerson.Count() > 0) {
-                //マスク解除
-                btDelete.Enabled = true;
-                btUpdate.Enabled = true;
-            }
-            else {
-                //マスク設定
-                btDelete.Enabled = false;
-                btUpdate.Enabled = false;
-            }
+          btUpdate.Enabled = btDelete.Enabled = listPerson.Count() > 0 ? true : false;
+
+
+            //if (listPerson.Count() > 0) {
+            //    //マスク解除
+            //    btDelete.Enabled = true;
+            //    btUpdate.Enabled = true;
+            //}
+            //else {
+            //    //マスク設定
+            //    btDelete.Enabled = false;
+            //    btUpdate.Enabled = false;
+            //}
             
         }
 
