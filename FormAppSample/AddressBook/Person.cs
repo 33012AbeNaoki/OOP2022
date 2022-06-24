@@ -31,10 +31,16 @@ namespace AddressBook {
         }
         public List< GroupType> listGroup{ get; set; }
 
+        [System.ComponentModel.DisplayName("番号種別")]
+        public KindNumberType KindNumber { get; set; }
+        [System.ComponentModel.DisplayName("電話番号")]
+        public string TlNumber { get; set; }
         [System.ComponentModel.DisplayName("登録日")]
         public DateTime Registration { get; set; }
         [System.ComponentModel.DisplayName("画像")]
         public Image Picture { get; set; }
+
+       
 
         public enum GroupType {
             家族,
@@ -42,7 +48,12 @@ namespace AddressBook {
             仕事,
             その他,
         }    
+        public enum KindNumberType {
 
+            自宅,
+            携帯,
+            その他,
+        }
         
 
 

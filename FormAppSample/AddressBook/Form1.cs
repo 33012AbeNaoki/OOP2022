@@ -47,9 +47,12 @@ namespace AddressBook {
                 MailAddress = tbMailAddress.Text,
                 Address = tbAddress.Text,
                 Company = cbCompany.Text,
-                Registration =dtpTimePicker.Value,
+                Registration = dtpTimePicker.Value,
+                TlNumber = tbTlNumber.Text,
                 Picture = pbPicture.Image,
                 listGroup = GetCheckBoxGroup(),
+                KindNumber = GetRadioButtonKindNumber(),
+
             };
 
             listPerson.Add(newPerson);
@@ -66,6 +69,21 @@ namespace AddressBook {
 
             setDbCompany(cbCompany.Text);
         }
+
+        private Person.KindNumberType GetRadioButtonKindNumber() {
+
+            //デフォルトの戻りを設定
+           var selectedkindNumber = Person.KindNumberType.その他;
+            if (rbHome.Checked) {//自宅にチェックがついている
+                selectedkindNumber = Person.KindNumberType.自宅;
+            
+            }
+            if (rbMobile.Checked) {//携帯にチェックがついている
+                selectedkindNumber = Person.KindNumberType.携帯;
+            }
+            return selectedkindNumber;
+        }
+
         //コンボボックスに会社名を登録する（重複なし）
         private void setDbCompany(string company){
 
@@ -96,6 +114,8 @@ namespace AddressBook {
             return listGroup;
         }
 
+        
+
         private void btPictureClear_Click(object sender, EventArgs e) {
 
             pbPicture.Image = null;
@@ -114,10 +134,33 @@ namespace AddressBook {
             tbAddress.Text = listPerson[index].Address;
             cbCompany.Text = listPerson[index].Company;
             pbPicture.Image = listPerson[index].Picture;
-
+            tbTlNumber.Text = listPerson[index].TlNumber;
             dtpTimePicker.Value = listPerson[index].Registration.Year > 1900 ?
                 listPerson[index].Registration : DateTime.Today;
 
+            setGroupType(index);//グループを設定
+            
+            setNumberType(index);//番号種別を設定
+        }
+
+        private void setNumberType(int index) {
+            switch (listPerson[index].KindNumber) {
+                case Person.KindNumberType.自宅:
+                    rbHome.Checked = true;
+                    break;
+                case Person.KindNumberType.携帯:
+                    rbMobile.Checked = true;
+                    break;
+
+                case Person.KindNumberType.その他:
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        private void setGroupType(int index) {
             groupCheckBoxAllClear();//グループチェックボックスを初期化
 
             foreach (var group in listPerson[index].listGroup) {
@@ -142,10 +185,12 @@ namespace AddressBook {
 
             }
         }
+
         //グループのチェックボックスをオールクリア
         private void groupCheckBoxAllClear() {
             cbFamily.Checked = cbFriend.Checked = cbWork.Checked = cbOther.Checked = false;
         }
+       
 
         //更新ボタンが押された時の処理
         private void btUpdate_Click(object sender, EventArgs e) {
@@ -157,6 +202,8 @@ namespace AddressBook {
             listPerson[dgvPersons.CurrentRow.Index].listGroup = GetCheckBoxGroup();
             listPerson[dgvPersons.CurrentRow.Index].Picture = pbPicture.Image;
             listPerson[dgvPersons.CurrentRow.Index].Registration = dtpTimePicker.Value;
+            listPerson[dgvPersons.CurrentRow.Index].TlNumber = tbTlNumber.Text;
+            listPerson[dgvPersons.CurrentRow.Index].KindNumber = GetRadioButtonKindNumber();
 
             dgvPersons.Refresh();//データグリッドビュー更新
         }
@@ -243,8 +290,6 @@ namespace AddressBook {
             }
             EnabledCheck();
         }
-
-       
     }
 }
 
