@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Xml.Linq;
 
+
 namespace Exercise1 {
     class Program {
         static void Main(string[] args) {
 
-            var file = "sample.xml";
+            var file = "Sample.xml";
             Exercise1_1(file);
             Console.WriteLine();
             Exercise1_2(file);
@@ -19,52 +20,72 @@ namespace Exercise1 {
             Console.WriteLine();
 
             var newfile = "sports.xml";
-            Exercise1_4(file, newfile);
+            //Exercise1_4(file, newfile);
+            //確認用
+            var text = File.ReadAllText(newfile);
+            Console.WriteLine(text);
         }
 
         private static void Exercise1_1(string file) {
 
-            var xdoc = XDocument.Load("Sample.xml");
+            var xdoc = XDocument.Load(file);
 
-            var samples = xdoc.Root.Elements().Select(x => new {
-                Name = (string)x.Element("name"),
-                Team = x.Element("teammembers")
+            var sports = xdoc.Root.Elements().Select(x => new {
+                Name = (string)x.Element("name").Value,
+                Team = x.Element("teammembers").Value
             });
 
-            foreach (var sample in samples) {
+            foreach (var sport in sports) {
 
-                Console.WriteLine("{0} {1}",sample.Name,sample.Team.Value);
+                Console.WriteLine("{0} {1}", sport.Name, sport.Team);
 
             }
         }
 
         private static void Exercise1_2(string file) {
 
-            var xdoc = XDocument.Load("Sample.xml");
+            var xdoc = XDocument.Load(file);
 
-            var samples = xdoc.Root.Elements().Select(x => new {
-               NameKanji = x.Element("name").Attribute("kanji").Value,
-                FirstPlay = x.Element("firstplayed"),
-            }).OrderBy(x => int.Parse((string)x.FirstPlay));
+            var sports = xdoc.Root.Elements().Select(x => new {
+                Name = x.Element("name").Attribute("kanji").Value,
+                FirstPlay = x.Element("firstplayed").Value,
+            }).OrderBy(x =>int.Parse(x.FirstPlay));
 
-            foreach (var sample in samples) {
+            foreach (var sport in sports) {
 
-                Console.WriteLine("{0} {1}",sample.NameKanji ,sample.FirstPlay.Value);
+                Console.WriteLine("{0} {1}", sport.Name, sport.FirstPlay);
             }
         }
 
         private static void Exercise1_3(string file) {
 
-            var xdoc = XDocument.Load("Sample.xml");
+            var xdoc = XDocument.Load(file);
 
-            var samples = xdoc.Root.Elements().Select(x => new {
-                Name = x.Element("name"),
-                Teammember = x.Element("teammembers"),
-            });
+            var sport= xdoc.Root.Elements().Select(x => new {
+                Name = x.Element("name").Value,
+                Teammember = x.Element("teammembers").Value,
+            }).OrderByDescending(x =>int.Parse(x.Teammember)).First();
+
+            Console.WriteLine("{0} ({1}人)",sport.Name,sport.Teammember);
+
         }
 
         private static void Exercise1_4(string file, string newfile) {
+
+            var xdoc = XElement.Load(file);
+
+            var element = new XElement("ballsport",
+                new XElement("name", "サッカー", new XAttribute("kana", "蹴球")),
+                new XElement("teammembers", "11"),
+                new XElement("birth", "1873"));
+
+            xdoc.Add(element);
+
+            //  保存
+            xdoc.Save(newfile);
+
             
+
         }
     }
 }
