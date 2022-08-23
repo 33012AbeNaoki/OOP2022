@@ -4,11 +4,10 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Xml.Serialization;
 
 namespace CarReportSystem {
+    //設定情報
     public class Settings {
-        
-       public Color MainFormColor { get; set;}
+        public int MainFormColor { get; set; }
     }
 }

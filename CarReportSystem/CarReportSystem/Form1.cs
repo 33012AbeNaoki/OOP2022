@@ -6,7 +6,6 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,250 +14,183 @@ using System.Xml.Serialization;
 
 namespace CarReportSystem {
     public partial class Form1 : Form {
-        //設定情報
+
+        //設定情報保存用オブジェクト
         Settings settings = new Settings();
 
-        BindingList<CarReport> listCarReport = new BindingList<CarReport>();
+        //カーレポート管理用リスト
+        BindingList<CarReport> listCarReports = new BindingList<CarReport>();
 
+        int mode = 0;
         public Form1() {
             InitializeComponent();
-
-            dgvArticle.DataSource = listCarReport;
+            dgvCarReport.DataSource = listCarReports;
         }
 
-        private void button1_Click(object sender, EventArgs e) {
-
-
+        private void btExit_Click(object sender, EventArgs e) {
+            //アプリケーションの終了
             Application.Exit();
         }
-        private void btReportinput_Click(object sender, EventArgs e) { //追加ボタン
 
-            if (String.IsNullOrWhiteSpace(cbReporterName.Text)) {
+        private void 設定ToolStripMenuItem_Click(object sender, EventArgs e) {
+            //色設定ダイアログの表示
+           
+            if (cdColorSelect.ShowDialog() == DialogResult.OK) {
+                BackColor = cdColorSelect.Color;//背景色変更
+                settings.MainFormColor = cdColorSelect.Color.ToArgb();  //設定オブジェクトへセット
+            }
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e) {
+
+            //設定ファイルをシリアル化（P305）
+            using (var writer = XmlWriter.Create("settings.xml")) {
+                var serializer = new XmlSerializer(settings.GetType());
+                serializer.Serialize(writer, settings);
+            }
+        }
+
+        private void Form1_Load(object sender, EventArgs e) {
+            //設定ファイルを逆シリアル化（P307）して背景の色を設定
+            using (var reader = XmlReader.Create("settings.xml")) {
+                var serializer = new XmlSerializer(typeof(Settings));
+                settings = serializer.Deserialize(reader) as Settings;
+                BackColor = Color.FromArgb(settings.MainFormColor);//ARGBからColorオブジェクトに変換
+            }
+
+            EnabledCheck(); //マスク処理呼び出し
+        }
+
+        private void btAddReport_Click(object sender, EventArgs e) {
+            //氏名が未入力なら登録しない
+            if (String.IsNullOrWhiteSpace(cbAuther.Text)) {
                 MessageBox.Show("氏名が入力されていません");
                 return;
             }
 
-            CarReport newPersons = new CarReport {
-
-                Date = dtDate.Value,
-                Auther = cbReporterName.Text,
-                Maker = GetRadioButtonKindNumber(),
-                CarName = cbCarname.Text,
+            CarReport carReport = new CarReport {
+                Date = dtpDate.Value,
+                Auther = cbAuther.Text,
+                Maker = GetRadioButtonMaker(),
+                CarName = cbCarName.Text,
                 Report = tbReport.Text,
-                Picture = pictureBox.Image,
-
+                Picture = pbPicture.Image,
             };
+            listCarReports.Add(carReport);
 
-            listCarReport.Add(newPersons);
-
-            dgvArticle.Rows[dgvArticle.RowCount - 1].Selected = true;
+            //EnabledCheck(); //マスク処理呼び出し
+            setCbAuther(cbAuther.Text);
+            setCbCarName(cbCarName.Text);
 
         }
-
-
-        private CarReport.MakerGroup GetRadioButtonKindNumber() {
-            var selectedmaker = CarReport.MakerGroup.その他;
+        //設定されているメーカーを返す
+        private CarReport.MakerGroup GetRadioButtonMaker() {
             if (rbToyota.Checked) {
-                selectedmaker = CarReport.MakerGroup.トヨタ;
+                return CarReport.MakerGroup.トヨタ;
             }
             if (rbNissan.Checked) {
-                selectedmaker = CarReport.MakerGroup.日産;
+                return CarReport.MakerGroup.日産;
             }
             if (rbHonda.Checked) {
-                selectedmaker = CarReport.MakerGroup.ホンダ;
+                return CarReport.MakerGroup.ホンダ;
             }
             if (rbSubaru.Checked) {
-                selectedmaker = CarReport.MakerGroup.スバル;
+                return CarReport.MakerGroup.スバル;
             }
-            if (rbOutsidecar.Checked) {
-                selectedmaker = CarReport.MakerGroup.外国車;
-
+            if (rbImport.Checked) {
+                return CarReport.MakerGroup.外国車;
             }
 
-            return selectedmaker;
-        }
-        private void dgvPersons_Click(object sender, EventArgs e) {
-
-            if (dgvArticle.CurrentRow == null) return;
-
-            int index = dgvArticle.CurrentRow.Index;
-            //例
-            //データグリッドビューのインデックス〇番目の名前をテキストボックスに格納
-            cbReporterName.Text = listCarReport[index].Auther;
-            cbCarname.Text = listCarReport[index].CarName;
-            tbReport.Text = listCarReport[index].Report;
-            pictureBox.Image = listCarReport[index].Picture;
-            dtDate.Value = listCarReport[index].Date.Year > 1900 ?
-                listCarReport[index].Date : DateTime.Today;
-
-            GetRadioButtonKindNumber(index);
+            return CarReport.MakerGroup.その他;
         }
 
-        private void GetRadioButtonKindNumber(int index) {
-            switch (listCarReport[index].Maker) {
-                case CarReport.MakerGroup.トヨタ:
-                    rbToyota.Checked = true;
-                    break;
-                case CarReport.MakerGroup.日産:
-                    rbNissan.Checked = true;
-                    break;
-                case CarReport.MakerGroup.ホンダ:
-                    rbHonda.Checked = true;
-                    break;
-                case CarReport.MakerGroup.スバル:
-                    rbSubaru.Checked = true;
-                    break;
-                case CarReport.MakerGroup.外国車:
-                    rbOutsidecar.Checked = true;
-                    break;
-                case CarReport.MakerGroup.その他:
-                    rbOther.Checked = true;
-                    break;
-
-                default:
-                    break;
-            }
+        private void btModifyReport_Click(object sender, EventArgs e) {
+            listCarReports[dgvCarReport.CurrentRow.Index].Date = dtpDate.Value;
+            listCarReports[dgvCarReport.CurrentRow.Index].Auther = cbAuther.Text;
+            listCarReports[dgvCarReport.CurrentRow.Index].Maker = GetRadioButtonMaker();
+            listCarReports[dgvCarReport.CurrentRow.Index].CarName = cbCarName.Text;
+            listCarReports[dgvCarReport.CurrentRow.Index].Report = tbReport.Text;
+            listCarReports[dgvCarReport.CurrentRow.Index].Picture = pbPicture.Image;
+            dgvCarReport.Refresh(); //データグリッドビュー更新
         }
-        private void setCBReporterName(string report) {
 
-            if (!cbReporterName.Items.Contains(report)) {
+        private void btDeleteReport_Click(object sender, EventArgs e) {
+            listCarReports.RemoveAt(dgvCarReport.CurrentRow.Index);
+            EnabledCheck(); //マスク処理呼び出し
 
+        }
+
+        private void EnabledCheck() {
+            btModifyReport.Enabled = btDeleteReport.Enabled = listCarReports.Count() > 0 ? true : false;
+
+        }
+        //コンボボックスに記録者を登録する（重複なし）
+        private void setCbAuther(string company) {
+            if (!cbAuther.Items.Contains(company)) {
                 //まだ登録されていなければ登録処理
-                cbReporterName.Items.Add(report);
+                cbAuther.Items.Add(company);
             }
         }
-        private void setCBCarName(string report2) {
-
-            if (!cbCarname.Items.Contains(report2)) {
-
-                cbCarname.Items.Add(report2);
+        //コンボボックスに車名を登録する（重複なし）
+        private void setCbCarName(string company) {
+            if (!cbCarName.Items.Contains(company)) {
+                //まだ登録されていなければ登録処理
+                cbCarName.Items.Add(company);
             }
         }
 
-
-        private void btPictureopen_Click(object sender, EventArgs e) {
-
-            if (openFileDialog.ShowDialog() == DialogResult.OK) {
-
-                pictureBox.Image = Image.FromFile(openFileDialog.FileName);
-
+        private void btPictureOpen_Click(object sender, EventArgs e) {
+            if (ofdCarReportOpen.ShowDialog() == DialogResult.OK) {
+                pbPicture.Image = Image.FromFile(ofdCarReportOpen.FileName);
             }
         }
-        private void btPicturedel_Click(object sender, EventArgs e) {
 
-            pictureBox.Image = null;
+        private void btPictureDelete_Click(object sender, EventArgs e) {
+            pbPicture.Image = null;
         }
 
-        private void btReportcorrect_Click(object sender, EventArgs e) {
-
-            listCarReport[dgvArticle.CurrentRow.Index].Auther = cbReporterName.Text;
-            listCarReport[dgvArticle.CurrentRow.Index].Maker = GetRadioButtonKindNumber();
-            listCarReport[dgvArticle.CurrentRow.Index].CarName = cbCarname.Text;
-            listCarReport[dgvArticle.CurrentRow.Index].Report = tbReport.Text;
-            listCarReport[dgvArticle.CurrentRow.Index].Picture = pictureBox.Image;
-            listCarReport[dgvArticle.CurrentRow.Index].Date = dtDate.Value;
-
-
-            dgvArticle.Refresh();//データグリッドビュー更新
-        }
-
-        private void btDel_Click(object sender, EventArgs e) {
-
-            listCarReport.RemoveAt(dgvArticle.CurrentRow.Index);
-        }
-
-        private void btSave_Click(object sender, EventArgs e) {
-
-
-
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK) {
-
-
+        private void btOpenReport_Click(object sender, EventArgs e) {
+            if (ofdCarReportOpen.ShowDialog() == DialogResult.OK) {
                 try {
-                    //バイナリー形式でシリアル化
-                    var bf = new BinaryFormatter();
-
-                    using (FileStream fs = File.Open(saveFileDialog1.FileName, FileMode.Create)) {
-
-                        bf.Serialize(fs, listCarReport);
-                    }
-                }
-                catch (Exception ex) {
-                    MessageBox.Show(ex.Message);
-                }
-            }
-
-        }
-
-        private void cbColorSelect_Click(object sender, EventArgs e) {
-
-            if (cdColorSelect.ShowDialog() == DialogResult.OK) {
-
-                BackColor = cdColorSelect.Color;
-                settings.MainFormColor = cdColorSelect.Color;//設定
-            }
-        }
-
-        private void btOpen_Click_1(object sender, EventArgs e) {
-
-            if (openFileDialog.ShowDialog() == DialogResult.OK) {
-                try {
-
                     //バイナリ形式で逆シリアル化
                     var bf = new BinaryFormatter();
-
-                    using (FileStream fs = File.Open(openFileDialog.FileName, FileMode.Open, FileAccess.Read)) {
-
+                    using (FileStream fs = File.Open(ofdCarReportOpen.FileName, FileMode.Open, FileAccess.Read)) {
                         //逆シリアル化して読み込む
-                        listCarReport = (BindingList<CarReport>)bf.Deserialize(fs);
-                        dgvArticle.DataSource = null;
-                        dgvArticle.DataSource = listCarReport;
+                        listCarReports = (BindingList<CarReport>)bf.Deserialize(fs);
+                        dgvCarReport.DataSource = null;
+                        dgvCarReport.DataSource = listCarReports;
                     }
                 }
                 catch (Exception ex) {
                     MessageBox.Show(ex.Message);
                 }
-                cbCarname.Items.Clear();//コンボボックスのアイテム削除
-                cbReporterName.Items.Clear();
-                //コンボボックス登録
-                foreach (var item in listCarReport.Select(p => p.Auther)) {
-
-                    setCBCarName(item);//存在する会社を登録
+                cbAuther.Items.Clear();    //コンボボックスのアイテム消去
+                cbCarName.Items.Clear();    //コンボボックスのアイテム消去
+                //コンボボックスへ新規登録
+                foreach (var item in listCarReports.Select(p => p.Auther)) {
+                    setCbAuther(item);
                 }
-                foreach (var item in listCarReport.Select(p => p.CarName)) {
-
-                    setCBReporterName(item);
-
+                foreach (var item in listCarReports.Select(p => p.CarName)) {
+                    setCbCarName(item);
                 }
             }
-
-        }
-        private void Form1_FormClosed(object sender, EventArgs e) { 
-
-            //設定ファイルをシリア
-
-            using (var writer= XmlWriter.Create("setting.xml")) {
-
-                var serializer = new XmlSerializer(settings.GetType());
-                serializer.Serialize(writer,settings);
-
-            }
+            EnabledCheck(); //マスク処理呼び出し
         }
 
-
-        private void Form1_Load(object sender, EventArgs e) {
-
-            //設定ファイルを逆シリアル化
-
-            using (var reader = XmlReader.Create(new StringReader("setting.xml"))) {
-
-                var serializer = new XmlSerializer(typeof(Settings));
-                settings = serializer.Deserialize(reader) as Settings;
-
+        private void btSaveReport_Click(object sender, EventArgs e) {
+            if (sfdCarReportSave.ShowDialog() == DialogResult.OK) {
+                try {
+                    //バイナリ形式でシリアル化
+                    var bf = new BinaryFormatter();
+                    using (FileStream fs = File.Open(sfdCarReportSave.FileName, FileMode.Create)) {
+                        bf.Serialize(fs, listCarReports);
+                    }
+                }
+                catch (Exception ex) {
+                    MessageBox.Show(ex.Message);
+                }
             }
-
         }
     }
 }
-
 
