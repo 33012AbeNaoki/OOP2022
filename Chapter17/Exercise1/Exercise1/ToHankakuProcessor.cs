@@ -16,7 +16,10 @@ namespace Exercise1 {
         };
 
         protected override void Execute(string line) {
-            string s = Regex.Replace(line, "[0-9]", p => ((char)(p.Value[0] - 'Ｏ' + 'o')).ToString());
+
+            string s = Regex.Replace(line, "[0-9]", c => _dictionary[c.Value[0]].ToString());
+
+            //string s = Regex.Replace(line, "[0-9]", p => ((char)(p.Value[0] - 'Ｏ' + 'o')).ToString());
 
             Console.WriteLine(s);
             
