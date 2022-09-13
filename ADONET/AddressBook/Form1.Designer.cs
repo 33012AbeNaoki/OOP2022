@@ -58,8 +58,8 @@ namespace AddressBook {
             this.btClear = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.ファイルFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.データベース接続ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.データベース接続ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.終了XToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.更新ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ヘルプHToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -85,7 +85,7 @@ namespace AddressBook {
             this.dataGridViewTextBoxColumn6,
             this.Image});
             this.addressTableDataGridView.DataSource = this.addressTableBindingSource;
-            this.addressTableDataGridView.Location = new System.Drawing.Point(8, 297);
+            this.addressTableDataGridView.Location = new System.Drawing.Point(12, 297);
             this.addressTableDataGridView.MultiSelect = false;
             this.addressTableDataGridView.Name = "addressTableDataGridView";
             this.addressTableDataGridView.ReadOnly = true;
@@ -93,6 +93,7 @@ namespace AddressBook {
             this.addressTableDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.addressTableDataGridView.Size = new System.Drawing.Size(776, 255);
             this.addressTableDataGridView.TabIndex = 1;
+
             this.addressTableDataGridView.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.addressTableDataGridView_DataError);
             this.addressTableDataGridView.Click += new System.EventHandler(this.addressTableDataGridView_Click);
             // 
@@ -350,6 +351,11 @@ namespace AddressBook {
             this.ファイルFToolStripMenuItem.Size = new System.Drawing.Size(99, 20);
             this.ファイルFToolStripMenuItem.Text = "ファイル（F）";
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(178, 6);
+            // 
             // データベース接続ToolStripMenuItem
             // 
             this.データベース接続ToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("データベース接続ToolStripMenuItem.Image")));
@@ -357,11 +363,6 @@ namespace AddressBook {
             this.データベース接続ToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
             this.データベース接続ToolStripMenuItem.Text = "データベース接続";
             this.データベース接続ToolStripMenuItem.Click += new System.EventHandler(this.データベース接続ToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(178, 6);
             // 
             // 終了XToolStripMenuItem
             // 
@@ -388,7 +389,7 @@ namespace AddressBook {
             // バージョン情報ToolStripMenuItem
             // 
             this.バージョン情報ToolStripMenuItem.Name = "バージョン情報ToolStripMenuItem";
-            this.バージョン情報ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.バージョン情報ToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.バージョン情報ToolStripMenuItem.Text = "バージョン情報";
             this.バージョン情報ToolStripMenuItem.Click += new System.EventHandler(this.バージョン情報ToolStripMenuItem_Click);
             // 
