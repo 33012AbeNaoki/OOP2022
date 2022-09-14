@@ -158,7 +158,9 @@ namespace AddressBook {
 
         }
 
-      
+        private void pbImage_Click(object sender, EventArgs e) {
+
+        }
     }
 }
 

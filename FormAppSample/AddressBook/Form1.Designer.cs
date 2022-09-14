@@ -132,6 +132,7 @@ namespace AddressBook {
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(272, 31);
             this.tbName.TabIndex = 2;
+
             // 
             // tbMailAddress
             // 
@@ -210,7 +211,6 @@ namespace AddressBook {
             this.pbPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbPicture.TabIndex = 5;
             this.pbPicture.TabStop = false;
-
             // 
             // btPictureOpen
             // 
