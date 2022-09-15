@@ -51,7 +51,7 @@ namespace AddressBook {
             this.tbImageOpen = new System.Windows.Forms.Button();
             this.btImageClear = new System.Windows.Forms.Button();
             this.ofdImage = new System.Windows.Forms.OpenFileDialog();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btNameSearch = new System.Windows.Forms.Button();
             this.tbSearchName = new System.Windows.Forms.TextBox();
             this.addressTableTableAdapter = new AddressBook.infosys202202DataSetTableAdapters.AddressTableTableAdapter();
             this.tableAdapterManager = new AddressBook.infosys202202DataSetTableAdapters.TableAdapterManager();
@@ -292,14 +292,15 @@ namespace AddressBook {
             // 
             this.ofdImage.FileName = "openFileDialog1";
             // 
-            // button1
+            // btNameSearch
             // 
-            this.button1.Location = new System.Drawing.Point(23, 263);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(86, 26);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "名前検索";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btNameSearch.Location = new System.Drawing.Point(23, 263);
+            this.btNameSearch.Name = "btNameSearch";
+            this.btNameSearch.Size = new System.Drawing.Size(86, 26);
+            this.btNameSearch.TabIndex = 4;
+            this.btNameSearch.Text = "名前検索";
+            this.btNameSearch.UseVisualStyleBackColor = true;
+            this.btNameSearch.Click += new System.EventHandler(this.btNameSearch_Click_1);
             // 
             // tbSearchName
             // 
@@ -405,7 +406,7 @@ namespace AddressBook {
             this.Controls.Add(this.tbImageOpen);
             this.Controls.Add(this.pbImage);
             this.Controls.Add(this.btPlus);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btNameSearch);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -463,7 +464,7 @@ namespace AddressBook {
         private System.Windows.Forms.Button tbImageOpen;
         private System.Windows.Forms.Button btImageClear;
         private System.Windows.Forms.OpenFileDialog ofdImage;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btNameSearch;
         private System.Windows.Forms.TextBox tbSearchName;
         private System.Windows.Forms.Button btClear;
         private System.Windows.Forms.MenuStrip menuStrip1;

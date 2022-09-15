@@ -110,10 +110,10 @@ namespace AddressBook {
 
         }
 
-        private void btNameSearch_Click(object sender, EventArgs e) {
-            addressTableTableAdapter.FillByName(infosys202202DataSet.AddressTable, tbSearchName.Text);
+        //private void btNameSearch_Click(object sender, EventArgs e) {
+            
 
-        }
+        //}
 
         private void btClear_Click(object sender, EventArgs e) {
 
@@ -160,6 +160,10 @@ namespace AddressBook {
 
         private void pbImage_Click(object sender, EventArgs e) {
 
+        }
+
+        private void btNameSearch_Click_1(object sender, EventArgs e) {
+            addressTableTableAdapter.FillByName(infosys202202DataSet.AddressTable, tbSearchName.Text);
         }
     }
 }
