@@ -13,7 +13,7 @@ namespace Chapter15 {
 
             Console.WriteLine("出力したい西暦を入力(終了：-1):");
             year = int.Parse(Console.ReadLine());
-            while(year != -1) {
+            while (year != -1) {
                 years.Add(year);
                 year = int.Parse(Console.ReadLine());
             }
@@ -44,8 +44,21 @@ namespace Chapter15 {
 
             }
             Console.WriteLine();
-            
 
+            var groups = Library.Books
+                .Where(b => years.Contains(b.PublishedYear))
+                .GroupBy(b => b.PublishedYear)
+                .OrderBy(g => g.Key);
+
+            foreach (var g in groups) {
+
+                Console.WriteLine($"{g.Key}年");
+                foreach (var book in g) {
+
+                    var category = Library.Categories.Where(b => b.Id == book.CategoryId).First();
+                    Console.WriteLine($"タイトル:{book.Title},価格：{book.Price},カテゴリ{category.Name}");
+                }
+            }
         }
     }
 }
