@@ -56,7 +56,7 @@ namespace Chapter15 {
                 Console.WriteLine($"{book.PublishedYear}年");
 
                     var category = Library.Categories.Where(b => b.Id == book.CategoryId).First();
-                    Console.WriteLine($"タイトル:{book.Title},価格：{book.Price},カテゴリ{category.Name}");
+                    Console.WriteLine($"タイトル:{book.Title},価格：{book.Price},カテゴリ{book.Name}");
                 
             }
         }
