@@ -48,16 +48,16 @@ namespace Chapter15 {
             var groups = Library.Books
                 .Where(b => years.Contains(b.PublishedYear))
                 .GroupBy(b => b.PublishedYear)
-                .OrderBy(g => g.Key);
+                .Select(group => group.OrderBy/*Descending*/(b => b.Price).First())
+                .OrderBy(o=> o.PublishedYear);
 
-            foreach (var g in groups) {
+            foreach (var book in groups) {
 
-                Console.WriteLine($"{g.Key}年");
-                foreach (var book in g) {
+                Console.WriteLine($"{book.PublishedYear}年");
 
                     var category = Library.Categories.Where(b => b.Id == book.CategoryId).First();
                     Console.WriteLine($"タイトル:{book.Title},価格：{book.Price},カテゴリ{category.Name}");
-                }
+                
             }
         }
     }
