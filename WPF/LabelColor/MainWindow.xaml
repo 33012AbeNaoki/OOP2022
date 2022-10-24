@@ -1,0 +1,43 @@
+﻿<Window x:Class="LabelColor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LabelColor"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="357.579" Width="650">
+    <Grid Margin="325,0,0,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Label x:Name="cLavel" HorizontalAlignment="Left" Height="250" Margin="-295,35,0,0" Grid.RowSpan="6" VerticalAlignment="Top" Width="260"/>
+        <TextBlock Text="R" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="24"/>
+        <TextBlock Text="G" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="24"/>
+        <TextBlock Text="B" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="24"/>
+        <Slider x:Name="rSlider" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Width="188" 
+                Grid.RowSpan="1" Grid.ColumnSpan="3" Margin="0,18,2,17" Maximum="250" IsSnapToTickEnabled="True" TickFrequency="1" ValueChanged="Slider_ValueChanged" />
+        <TextBox x:Name="rText" Text="{Binding Value, ElementName=rSlider, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="4" FontSize="18" Margin="0,18,10,11" HorizontalAlignment="Right" Width="43" />
+        <Slider x:Name="gSlider" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Width="188" 
+                Grid.ColumnSpan="3" Margin="0,25,2,10" Maximum="250" IsSnapToTickEnabled="True" TickFrequency="1" ValueChanged="Slider_ValueChanged"/>
+        <TextBox x:Name="gText" Text="{Binding Value, ElementName=gSlider, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="4" FontSize="18" Margin="0,18,10,11" HorizontalAlignment="Right" Width="43"/>
+        <Slider x:Name="bSlider" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Width="188" 
+                Grid.ColumnSpan="3" Margin="0,24,2,11" Maximum="250" IsSnapToTickEnabled="True" TickFrequency="1" ValueChanged="Slider_ValueChanged"/>
+        <TextBox x:Name="bText" Text="{Binding Value, ElementName=bSlider, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="4" FontSize="18" Margin="0,18,10,11" HorizontalAlignment="Right" Width="43"/>
+        
+        
+        
+        
+    </Grid>
+</Window>

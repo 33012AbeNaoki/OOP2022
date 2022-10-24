@@ -29,9 +29,9 @@ namespace SampleUnitConverter {
         ///<summary>
         ///ヤード単位からメートル単位に変換します
         ///</summary>
-        /////<param name="unit">ヤード単位</param>
-        /////<param name="value">値</param>
-        /////<returns></returns>
+        ///<param name="unit">ヤード単位</param>
+        ///<param name="value">値</param>
+        ///<returns></returns>
         public double FromImperialUnit(ImperialUnit unit,double value) {
             return (value * unit.Coefficient) * 25.4 / this.Coefficient;
         }
@@ -50,9 +50,9 @@ namespace SampleUnitConverter {
         ///<summary>
         ///ヤード単位からメートル単位に変換します
         ///</summary>
-        /////<param name = "unit" > ヤード単位 </ param >
-        /////< param name="value">値</param>
-        /////<returns></returns>
+        ///<param name = "unit" > ヤード単位 </ param >
+        ///< param name="value">値</param>
+        ///<returns></returns>
         public double FromMetricUnit(MetricUnit unit, double value) {
             return (value * unit.Coefficient) * 25.4 / this.Coefficient;
         }
