@@ -36,8 +36,5 @@
                 Grid.ColumnSpan="3" Margin="0,24,2,11" Maximum="250" IsSnapToTickEnabled="True" TickFrequency="1" ValueChanged="Slider_ValueChanged"/>
         <TextBox x:Name="bText" Text="{Binding Value, ElementName=bSlider, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="4" FontSize="18" Margin="0,18,10,11" HorizontalAlignment="Right" Width="43"/>
         
-        
-        
-        
     </Grid>
 </Window>
