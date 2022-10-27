@@ -25,6 +25,33 @@ namespace ColorChecker {
             DataContext = GetColorList();
 
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e) {
+
+            ChangeColor();
+        }
+
+
+        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
+
+            ChangeColor();
+
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+
+            var mycolor = (MyColor)((ComboBox)sender).SelectedItem;
+            var color = mycolor.Color;
+            var name = mycolor.Name;
+
+      
+
+            rSlider.Value = color.R;
+            gSlider.Value = color.G;
+            bSlider.Value = color.B;
+        }
+
+
         /// <summary>
         /// 色と色名を保持するクラス
         /// </summary>
@@ -41,36 +68,21 @@ namespace ColorChecker {
                 .Select(i => new MyColor() { Color = (Color)i.GetValue(null), Name = i.Name }).ToArray();
         }
 
+        private void ChangeColor() {
 
-        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
+            var r = byte.Parse(rValue.Text);
+            var g = byte.Parse(gValue.Text);
+            var b = byte.Parse(bValue.Text);
 
+            cLavel.Background = new SolidColorBrush(Color.FromRgb(r, g, b));
+        }
 
+        private void Button_Click(object sender, RoutedEventArgs e) {
 
-            int r = (int)rSlider.Value;
-            int g = (int)gSlider.Value;
-            int b = (int)bSlider.Value;
-
-            cLavel.Background = new SolidColorBrush(Color.FromRgb((byte)r, (byte)g, (byte)b));
 
         }
 
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-
-            var mycolor = (MyColor)((ComboBox)sender).SelectedItem;
-            var color = mycolor.Color;
-            var name = mycolor.Name;
-
-            cLavel.Background = new SolidColorBrush(Color.FromRgb(color.R, color.G, color.B));
-
-            rText.Text = FromRgb(color.R);
-            gText.Text = FromRgb(color.G);
-            bText.Text = FromRgb(color.B);
-        }
-        private string FromRgb(byte r) {
-
-            return r.ToString();
-
-        }
+      
 
         private void Slider_PreviewTextInput(object sender, TextCompositionEventArgs e) {
 
@@ -84,8 +96,6 @@ namespace ColorChecker {
             }
         }
 
-        private void Text_PreviewTextInput(object sender, TextCompositionEventArgs e) {
-
-        }
+      
     }
 }
