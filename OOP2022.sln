@@ -134,7 +134,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleSlider", "WPF\SampleS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleUnitConverter", "WPF\SampleUnitConverter\SampleUnitConverter.csproj", "{76D465BD-88DD-4128-A8F4-3BFCB04BEC3F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabelColor", "WPF\LabelColor\LabelColor.csproj", "{5BF2EDFE-8520-4858-B317-6262CAB7030A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColorChecker", "WPF\LabelColor\ColorChecker.csproj", "{5BF2EDFE-8520-4858-B317-6262CAB7030A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
