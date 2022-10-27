@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ColorChecker"
         mc:Ignorable="d"
-        Title="MainWindow" Height="357.579" Width="650">
+        Title="ColorChecker" Height="357" Width="650">
     <Grid Margin="325,0,0,0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -26,15 +26,44 @@
         <TextBlock Text="R" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="24"/>
         <TextBlock Text="G" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="24"/>
         <TextBlock Text="B" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="24"/>
+        
         <Slider x:Name="rSlider" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Width="188" 
                 Grid.RowSpan="1" Grid.ColumnSpan="3" Margin="0,18,2,17" Maximum="255" IsSnapToTickEnabled="True" TickFrequency="1" ValueChanged="Slider_ValueChanged" />
-        <TextBox x:Name="rText" Text="{Binding Value, ElementName=rSlider, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="4" FontSize="18" Margin="0,18,10,11" HorizontalAlignment="Right" Width="43" />
+        
+        <TextBox x:Name="rText" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="Slider_PreviewTextInput" CommandManager.PreviewExecuted="Slider_PreviewExecuted" 
+                 Text="{Binding Value, ElementName=rSlider, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="4" FontSize="18" Margin="0,18,10,11" 
+                 HorizontalAlignment="Right" Width="43" />
+        
         <Slider x:Name="gSlider" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Width="188" 
                 Grid.ColumnSpan="3" Margin="0,25,2,10" Maximum="255" IsSnapToTickEnabled="True" TickFrequency="1" ValueChanged="Slider_ValueChanged"/>
-        <TextBox x:Name="gText" Text="{Binding Value, ElementName=gSlider, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="4" FontSize="18" Margin="0,18,10,11" HorizontalAlignment="Right" Width="43"/>
+        
+        <TextBox x:Name="gText" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="Slider_PreviewTextInput" CommandManager.PreviewExecuted="Slider_PreviewExecuted" 
+                 Text="{Binding Value, ElementName=gSlider, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="4" FontSize="18" Margin="0,18,10,11" 
+                 HorizontalAlignment="Right" Width="43"/>
+        
         <Slider x:Name="bSlider" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Width="188" 
                 Grid.ColumnSpan="3" Margin="0,24,2,11" Maximum="255" IsSnapToTickEnabled="True" TickFrequency="1" ValueChanged="Slider_ValueChanged"/>
-        <TextBox x:Name="bText" Text="{Binding Value, ElementName=bSlider, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="4" FontSize="18" Margin="0,18,10,11" HorizontalAlignment="Right" Width="43"/>
         
+        <TextBox x:Name="bText" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="Slider_PreviewTextInput" CommandManager.PreviewExecuted="Slider_PreviewExecuted" 
+                 Text="{Binding Value, ElementName=bSlider, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="4" FontSize="18" Margin="0,18,10,11" 
+                 HorizontalAlignment="Right" Width="43"/>
+
+        <ComboBox x:Name="selectColor" ItemsSource="{Binding}" SelectedValue="{Binding Color}" Margin="10,20,0,0" Height="24" VerticalAlignment="Center" 
+                  VerticalContentAlignment="Center" HorizontalAlignment="Left" Width="155" 
+                  Grid.ColumnSpan="3" Grid.Column="1" Grid.Row="4" SelectionChanged="ComboBox_SelectionChanged">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Border Width="20" Height="Auto" Margin="5,0" BorderThickness="1" BorderBrush="Black">
+                            <Border.Background>
+                                <SolidColorBrush Color="{Binding Color}"/>
+                            </Border.Background>
+                        </Border>
+                        <TextBlock Text="{Binding Name}"></TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+
     </Grid>
 </Window>
