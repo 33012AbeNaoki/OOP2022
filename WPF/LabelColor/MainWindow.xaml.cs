@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -16,14 +17,20 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace ColorChecker {
+
+  
     /// <summary>
     /// MainWindow.xaml の相互作用ロジック
     /// </summary>
     public partial class MainWindow : Window {
+
+        List<MyColor> colorList = new List<MyColor> {
+
+        };
+
         public MainWindow() {
             InitializeComponent();
             DataContext = GetColorList();
-
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e) {
@@ -42,15 +49,55 @@ namespace ColorChecker {
 
             var mycolor = (MyColor)((ComboBox)sender).SelectedItem;
             var color = mycolor.Color;
-            var name = mycolor.Name;
+            
 
-      
+            cLavel.Background = new SolidColorBrush(Color.FromRgb(color.R, color.G, color.B));
 
-            rSlider.Value = color.R;
-            gSlider.Value = color.G;
-            bSlider.Value = color.B;
+            rValue.Text = FromRgb(color.R);
+            gValue.Text = FromRgb(color.G);
+            bValue.Text = FromRgb(color.B);
         }
 
+        private string FromRgb(byte r) {
+            return r.ToString();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e) {
+
+            MyColor stColor = new MyColor();
+
+            var r = byte.Parse(rValue.Text);
+            var g = byte.Parse(gValue.Text);
+            var b = byte.Parse(bValue.Text);
+
+            stColor.Color = Color.FromRgb(r, g, b);
+
+            var colorName = ((IEnumerable<MyColor>)DataContext)
+                .Where(c => c.Color.R == stColor.Color.R &&
+                c.Color.G == stColor.Color.G &&
+                c.Color.B == stColor.Color.B).FirstOrDefault();
+
+
+            stockList.Items.Insert(0,colorName?.Name ??
+                "   R  :" + rValue.Text + "   G  :" + gValue.Text + "   B  :" + bValue.Text);
+
+            colorList.Insert(0,stColor);
+        }
+        private void stockList_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+
+            rSlider.Value = colorList[stockList.SelectedIndex].Color.R;
+            gSlider.Value = colorList[stockList.SelectedIndex].Color.G;
+            bSlider.Value = colorList[stockList.SelectedIndex].Color.B;
+            ChangeColor();
+        }
+        private void ChangeColor() {
+
+            var r = byte.Parse(rValue.Text);
+            var g = byte.Parse(gValue.Text);
+            var b = byte.Parse(bValue.Text);
+
+            cLavel.Background = new SolidColorBrush(Color.FromRgb(r, g, b));
+        }
 
         /// <summary>
         /// 色と色名を保持するクラス
@@ -68,21 +115,6 @@ namespace ColorChecker {
                 .Select(i => new MyColor() { Color = (Color)i.GetValue(null), Name = i.Name }).ToArray();
         }
 
-        private void ChangeColor() {
-
-            var r = byte.Parse(rValue.Text);
-            var g = byte.Parse(gValue.Text);
-            var b = byte.Parse(bValue.Text);
-
-            cLavel.Background = new SolidColorBrush(Color.FromRgb(r, g, b));
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e) {
-
-
-        }
-
-      
 
         private void Slider_PreviewTextInput(object sender, TextCompositionEventArgs e) {
 
@@ -96,6 +128,7 @@ namespace ColorChecker {
             }
         }
 
-      
+     
+
     }
 }
