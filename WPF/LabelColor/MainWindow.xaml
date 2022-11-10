@@ -78,8 +78,9 @@
 
             </Grid.RowDefinitions>
 
-            <Button Grid.Row="0" Content="STOCK" FontSize="20" Margin="10,5" Click="Button_Click"/>
+            <Button Grid.Row="0" Content="STOCK" FontSize="20" Margin="10,5,166,5" Click="Button_Click"/>
             <ListBox x:Name="stockList" Grid.Row="1" SelectionChanged="stockList_SelectionChanged" FontSize="20"/>
+           <Button x:Name="delButton" Content="Delete" HorizontalAlignment="Left" Height="44" Margin="164,5,0,0" VerticalAlignment="Top" Width="151" Click="delButton_Click" FontSize="20"/>
         </Grid>
     </Grid>
 </Window>

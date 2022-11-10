@@ -85,6 +85,8 @@ namespace ColorChanger {
         }
         private void stockList_SelectionChanged(object sender, SelectionChangedEventArgs e) {
 
+            if (stockList.SelectedIndex == -1) return;        
+
             rSlider.Value = colorList[stockList.SelectedIndex].Color.R;
             gSlider.Value = colorList[stockList.SelectedIndex].Color.G;
             bSlider.Value = colorList[stockList.SelectedIndex].Color.B;
@@ -99,6 +101,12 @@ namespace ColorChanger {
             cLavel.Background = new SolidColorBrush(Color.FromRgb(r, g, b));
         }
 
+        private void delButton_Click(object sender, RoutedEventArgs e) {
+
+            stockList.Items.Remove(stockList.SelectedItem);
+            colorList.Remove((MyColor)stockList.SelectedItem);           
+
+        }
         /// <summary>
         /// 色と色名を保持するクラス
         /// </summary>
@@ -128,7 +136,6 @@ namespace ColorChanger {
             }
         }
 
-     
 
     }
 }
