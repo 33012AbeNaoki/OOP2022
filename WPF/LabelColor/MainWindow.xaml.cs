@@ -85,7 +85,7 @@ namespace ColorChanger {
         }
         private void stockList_SelectionChanged(object sender, SelectionChangedEventArgs e) {
 
-            if (stockList.SelectedIndex == -1) return;        
+            if (stockList.SelectedIndex == -1) return;     
 
             rSlider.Value = colorList[stockList.SelectedIndex].Color.R;
             gSlider.Value = colorList[stockList.SelectedIndex].Color.G;
@@ -103,8 +103,18 @@ namespace ColorChanger {
 
         private void delButton_Click(object sender, RoutedEventArgs e) {
 
-            stockList.Items.Remove(stockList.SelectedItem);
-            colorList.Remove((MyColor)stockList.SelectedItem);           
+            if (stockList.SelectedIndex == -1) return;
+
+            colorList.RemoveAt(stockList.SelectedIndex);
+            stockList.Items.RemoveAt(stockList.SelectedIndex);
+
+
+            //var dellIndex = stockList.SelectedIndex;
+
+            //if (dellIndex == -1) return;
+
+            //stockList.Items.RemoveAt(dellIndex);
+            //colorList.RemoveAt(dellIndex);
 
         }
         /// <summary>
