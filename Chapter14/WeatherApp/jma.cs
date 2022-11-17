@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 namespace WeatherApp {
 
 
-
+    public class Rootobject {
+        public Class1[] Property1 { get; set; }
+    }
 
     public class Class1 {
         public string publishingOffice { get; set; }
@@ -15,6 +17,7 @@ namespace WeatherApp {
         public Timesery[] timeSeries { get; set; }
         public Tempaverage tempAverage { get; set; }
         public Precipaverage precipAverage { get; set; }
+        public string text { get; set; }
     }
 
     public class Tempaverage {
@@ -72,6 +75,57 @@ namespace WeatherApp {
     public class Area5 {
         public string name { get; set; }
         public string code { get; set; }
+    }
+
+
+    public class Rootobject1 {
+        public string publishingOffice { get; set; }
+        public DateTime reportDatetime { get; set; }
+        public string targetArea { get; set; }
+        public string headlineText { get; set; }
+        public string text { get; set; }
+    }
+
+
+
+    public class Rootobject_t {
+        public string publishingOffice { get; set; }
+        public DateTime reportDatetime { get; set; }
+        public string targetArea { get; set; }
+        public string headlineText { get; set; }
+        public string text { get; set; }
+    }
+
+
+    public class Rootobject_p {
+        public Near near { get; set; }
+        public Near_Monochrome near_monochrome { get; set; }
+        public Asia asia { get; set; }
+        public Asia_Monochrome asia_monochrome { get; set; }
+    }
+
+    public class Near {
+        public string[] now { get; set; }
+        public string[] ft24 { get; set; }
+        public string[] ft48 { get; set; }
+    }
+
+    public class Near_Monochrome {
+        public string[] now { get; set; }
+        public string[] ft24 { get; set; }
+        public string[] ft48 { get; set; }
+    }
+
+    public class Asia {
+        public string[] now { get; set; }
+        public string[] ft24 { get; set; }
+        public string[] ft48 { get; set; }
+    }
+
+    public class Asia_Monochrome {
+        public string[] now { get; set; }
+        public string[] ft24 { get; set; }
+        public string[] ft48 { get; set; }
     }
 
 }
