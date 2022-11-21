@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -102,6 +103,8 @@ namespace WeatherApp {
         public Near_Monochrome near_monochrome { get; set; }
         public Asia asia { get; set; }
         public Asia_Monochrome asia_monochrome { get; set; }
+
+       
     }
 
     public class Near {

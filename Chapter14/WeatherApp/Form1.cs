@@ -23,12 +23,15 @@ namespace WeatherApp {
         private void btWeatherGET_Click(object sender, EventArgs e) {
 
             if (cbSelect.SelectedItem == null) {
-                MessageBox.Show("地域を選択してください。","エラー",
+                MessageBox.Show("地域を選択してください。地域が選択されていない場合は、" +
+                    "宗谷地方の情報を表示します。"
+                    , "エラー",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error); 
             }
             else {
                 URLSelect();
+
             }
             
             var wc = new WebClient() {
@@ -42,14 +45,23 @@ namespace WeatherApp {
             var dString2 = wc.DownloadString(url2);
             var json2 = JsonConvert.DeserializeObject<Rootobject_t>(dString2);
 
+            var dStringp = wc.DownloadString(urlp);
+            var jsonp = JsonConvert.DeserializeObject<Rootobject_p>(dStringp);
+
             tbNitiji.Text = json[0].reportDatetime.ToString();
             tb0.Text = json[0].timeSeries[0].areas[0].weathers[0];
             tb1.Text = json[0].timeSeries[0].areas[0].weathers[1];
-            //tb2.Text = json[0].timeSeries[0].areas[0].weathers[2]; 境界外エラー
-            tbMintmp0.Text = json[0].timeSeries[0].areas[8].tempsMin[8];
-
+            tb2.Text = json[0].timeSeries[0].areas[0].weathers[2];
+            lb1.Text = json[0].timeSeries[2].areas[0].temps[0];
+            lb2.Text = json[0].timeSeries[2].areas[0].temps[2];
+            lb3.Text = json[0].timeSeries[2].areas[0].temps[3];
+            lb4.Text = json[1].timeSeries[1].areas[0].tempsMin[1];
+            lb5.Text = json[1].timeSeries[1].areas[0].tempsMax[1];
             tbGaikyou.Text = json2.text;
 
+            pb1.ImageLocation = jsonp.near.now[0];
+            pb2.ImageLocation = jsonp.near.ft24[0];
+            pb3.ImageLocation = jsonp.near.ft48[0];
         }
 
         private void URLSelect() {
@@ -281,7 +293,6 @@ namespace WeatherApp {
                 url2 = "https://www.jma.go.jp/bosai/forecast/data/overview_forecast/474000.json";
             }
         }
-
     }
 }
 
