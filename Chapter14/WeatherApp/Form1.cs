@@ -13,11 +13,18 @@ using System.Windows.Forms;
 namespace WeatherApp {
     public partial class Form1 : Form {
 
+        public string weathercode1;
+        public string weathercode2;
+        public string weathercode3;
+
         public string url = "https://www.jma.go.jp/bosai/forecast/data/forecast/011000.json";
         public string url2 = "https://www.jma.go.jp/bosai/forecast/data/overview_forecast/011000.json";
         public string urlp = "https://www.jma.go.jp/bosai/weather_map/data/list.json";
+
         public Form1() {
             InitializeComponent();
+
+            cbSelect.SelectedItem = "群馬県";
         }
 
         private void btWeatherGET_Click(object sender, EventArgs e) {
@@ -27,42 +34,92 @@ namespace WeatherApp {
                     "宗谷地方の情報を表示します。"
                     , "エラー",
                     MessageBoxButtons.OK,
-                    MessageBoxIcon.Error); 
+                    MessageBoxIcon.Error);
             }
             else {
                 URLSelect();
 
             }
-            
+
             var wc = new WebClient() {
 
                 Encoding = Encoding.UTF8
             };
+            try {
+                var dString = wc.DownloadString(url);
+                var json = JsonConvert.DeserializeObject<Class1[]>(dString);
 
-            var dString = wc.DownloadString(url);
-            var json = JsonConvert.DeserializeObject<Class1[]>(dString);
+                var dString2 = wc.DownloadString(url2);
+                var json2 = JsonConvert.DeserializeObject<Rootobject_t>(dString2);
 
-            var dString2 = wc.DownloadString(url2);
-            var json2 = JsonConvert.DeserializeObject<Rootobject_t>(dString2);
+                var dStringp = wc.DownloadString(urlp);
+                var jsonp = JsonConvert.DeserializeObject<Rootobject_p>(dStringp);
 
-            var dStringp = wc.DownloadString(urlp);
-            var jsonp = JsonConvert.DeserializeObject<Rootobject_p>(dStringp);
 
-            tbNitiji.Text = json[0].reportDatetime.ToString();
-            tb0.Text = json[0].timeSeries[0].areas[0].weathers[0];
-            tb1.Text = json[0].timeSeries[0].areas[0].weathers[1];
-            tb2.Text = json[0].timeSeries[0].areas[0].weathers[2];
-            lb1.Text = json[0].timeSeries[2].areas[0].temps[0];
-            lb2.Text = json[0].timeSeries[2].areas[0].temps[2];
-            lb3.Text = json[0].timeSeries[2].areas[0].temps[3];
-            lb4.Text = json[1].timeSeries[1].areas[0].tempsMin[1];
-            lb5.Text = json[1].timeSeries[1].areas[0].tempsMax[1];
-            tbGaikyou.Text = json2.text;
+                Weather_info(json, json2, jsonp);
+            }
+            catch (Exception) {
 
-            pb1.ImageLocation = jsonp.near.now[0];
-            pb2.ImageLocation = jsonp.near.ft24[0];
-            pb3.ImageLocation = jsonp.near.ft48[0];
+                MessageBox.Show("ネットワークに接続してください。","エラー",
+                   MessageBoxButtons.OK,
+                   MessageBoxIcon.Error);
+            }
+           
+
         }
+
+        private void Weather_info(Class1[] json, Rootobject_t json2, Rootobject_p jsonp) {
+            try {
+                
+                lbdate.Text = json[0].reportDatetime.ToString();
+                lbtoday.Text = json[0].timeSeries[0].areas[0].weathers[0];
+                lbtomo.Text = json[0].timeSeries[0].areas[0].weathers[1];
+                lbtomo2.Text =json[0].timeSeries[0].areas[0].weathers[2];
+                lb1.Text = json[0].timeSeries[2].areas[0].temps[0];
+                lb2.Text = json[0].timeSeries[2].areas[0].temps[2];
+                lb3.Text = json[0].timeSeries[2].areas[0].temps[3];
+                lb4.Text = json[1].timeSeries[1].areas[0].tempsMin[1];
+                lb5.Text = json[1].timeSeries[1].areas[0].tempsMax[1];
+                tbGaikyou.Text = json2.text;
+                lb0.Text = "-";
+
+                weathercode1 = json[0].timeSeries[0].areas[0].weatherCodes[0];
+                weathercode2 = json[0].timeSeries[0].areas[0].weatherCodes[1];
+                weathercode3 = json[0].timeSeries[0].areas[0].weatherCodes[2];
+
+                pb1.ImageLocation = "https://www.jma.go.jp/bosai/forecast/img/" + weathercode1 + ".png";
+                pb2.ImageLocation = "https://www.jma.go.jp/bosai/forecast/img/" + weathercode2 + ".png";
+                pb3.ImageLocation = "https://www.jma.go.jp/bosai/forecast/img/" + weathercode3 + ".png";
+
+               
+            }
+            catch (Exception) {
+
+                lbdate.Text = json[0].reportDatetime.ToString();
+                lbtoday.Text = json[0].timeSeries[0].areas[0].weathers[0];
+                lbtomo.Text = json[0].timeSeries[0].areas[0].weathers[1];
+                lbtomo2.Text = "情報なし";
+                lb0.Text = "-";
+                lb1.Text = json[0].timeSeries[2].areas[0].temps[0];
+                lb2.Text = json[0].timeSeries[2].areas[0].temps[2];
+                lb3.Text = json[0].timeSeries[2].areas[0].temps[3];
+                lb4.Text = json[1].timeSeries[1].areas[0].tempsMin[1];
+                lb5.Text = json[1].timeSeries[1].areas[0].tempsMax[1];
+                tbGaikyou.Text = json2.text;
+
+                weathercode1 = json[0].timeSeries[0].areas[0].weatherCodes[0];
+                weathercode2 = json[0].timeSeries[0].areas[0].weatherCodes[1];
+                weathercode3 = json[0].timeSeries[0].areas[0].weatherCodes[2];
+
+                pb1.ImageLocation = "https://www.jma.go.jp/bosai/forecast/img/" + weathercode1 + ".png";
+                pb2.ImageLocation = "https://www.jma.go.jp/bosai/forecast/img/" + weathercode2 + ".png";
+                pb3.ImageLocation = "https://www.jma.go.jp/bosai/forecast/img/" + weathercode3 + ".png";
+            }
+        }
+
+    
+
+
 
         private void URLSelect() {
 
@@ -293,6 +350,8 @@ namespace WeatherApp {
                 url2 = "https://www.jma.go.jp/bosai/forecast/data/overview_forecast/474000.json";
             }
         }
+
+        
     }
 }
 

@@ -28,22 +28,17 @@ namespace WeatherApp {
             this.label1 = new System.Windows.Forms.Label();
             this.cbSelect = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.tbNitiji = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.tb1 = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.tbGaikyou = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.tb2 = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
+            this.toMax = new System.Windows.Forms.Label();
+            this.tomoMin = new System.Windows.Forms.Label();
+            this.tomoMax = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.tb0 = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.pb1 = new System.Windows.Forms.PictureBox();
+            this.tomo2Min = new System.Windows.Forms.Label();
+            this.tomo2Max = new System.Windows.Forms.Label();
             this.pb2 = new System.Windows.Forms.PictureBox();
             this.pb3 = new System.Windows.Forms.PictureBox();
             this.lb1 = new System.Windows.Forms.Label();
@@ -51,23 +46,33 @@ namespace WeatherApp {
             this.lb3 = new System.Windows.Forms.Label();
             this.lb4 = new System.Windows.Forms.Label();
             this.lb5 = new System.Windows.Forms.Label();
+            this.tmDOmax = new System.Windows.Forms.Label();
+            this.tm2DOmax = new System.Windows.Forms.Label();
+            this.tm2DOmin = new System.Windows.Forms.Label();
+            this.tmDOmin = new System.Windows.Forms.Label();
+            this.tDOmax = new System.Windows.Forms.Label();
+            this.toMin = new System.Windows.Forms.Label();
+            this.toDOmin = new System.Windows.Forms.Label();
+            this.lb0 = new System.Windows.Forms.Label();
+            this.lbdate = new System.Windows.Forms.Label();
+            this.lbtoday = new System.Windows.Forms.Label();
+            this.lbtomo = new System.Windows.Forms.Label();
+            this.lbtomo2 = new System.Windows.Forms.Label();
+            this.pb1 = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.pb1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb1)).BeginInit();
             this.SuspendLayout();
             // 
             // btWeatherGET
             // 
-            this.btWeatherGET.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btWeatherGET.BackColor = System.Drawing.Color.Transparent;
+            this.btWeatherGET.Font = new System.Drawing.Font("MS UI Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.btWeatherGET.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.btWeatherGET.Location = new System.Drawing.Point(358, 55);
+            this.btWeatherGET.Location = new System.Drawing.Point(296, 16);
             this.btWeatherGET.Name = "btWeatherGET";
-            this.btWeatherGET.Size = new System.Drawing.Size(72, 33);
+            this.btWeatherGET.Size = new System.Drawing.Size(85, 54);
             this.btWeatherGET.TabIndex = 1;
             this.btWeatherGET.Text = "取得";
             this.btWeatherGET.UseVisualStyleBackColor = false;
@@ -76,10 +81,10 @@ namespace WeatherApp {
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("MS UI Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.label1.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label1.Location = new System.Drawing.Point(65, 52);
+            this.label1.Location = new System.Drawing.Point(12, 30);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(66, 27);
             this.label1.TabIndex = 2;
@@ -87,7 +92,9 @@ namespace WeatherApp {
             // 
             // cbSelect
             // 
-            this.cbSelect.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.cbSelect.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.cbSelect.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.cbSelect.ForeColor = System.Drawing.Color.Black;
             this.cbSelect.FormattingEnabled = true;
             this.cbSelect.Items.AddRange(new object[] {
             "宗谷地方",
@@ -147,9 +154,9 @@ namespace WeatherApp {
             "大東島地方",
             "宮古島地方",
             "八重山地方"});
-            this.cbSelect.Location = new System.Drawing.Point(137, 59);
+            this.cbSelect.Location = new System.Drawing.Point(84, 29);
             this.cbSelect.Name = "cbSelect";
-            this.cbSelect.Size = new System.Drawing.Size(167, 29);
+            this.cbSelect.Size = new System.Drawing.Size(167, 32);
             this.cbSelect.TabIndex = 3;
             // 
             // label3
@@ -161,23 +168,13 @@ namespace WeatherApp {
             this.label3.Size = new System.Drawing.Size(0, 27);
             this.label3.TabIndex = 2;
             // 
-            // tbNitiji
-            // 
-            this.tbNitiji.BackColor = System.Drawing.SystemColors.HighlightText;
-            this.tbNitiji.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.tbNitiji.Location = new System.Drawing.Point(137, 95);
-            this.tbNitiji.Multiline = true;
-            this.tbNitiji.Name = "tbNitiji";
-            this.tbNitiji.Size = new System.Drawing.Size(182, 46);
-            this.tbNitiji.TabIndex = 0;
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("MS UI Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.label4.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label4.Location = new System.Drawing.Point(11, 95);
+            this.label4.Location = new System.Drawing.Point(12, 79);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(120, 27);
             this.label4.TabIndex = 2;
@@ -186,31 +183,22 @@ namespace WeatherApp {
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label5.BackColor = System.Drawing.Color.Transparent;
             this.label5.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.label5.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label5.Location = new System.Drawing.Point(12, 489);
+            this.label5.Location = new System.Drawing.Point(589, 148);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(150, 24);
             this.label5.TabIndex = 2;
             this.label5.Text = "明後日の天気";
             // 
-            // tb1
-            // 
-            this.tb1.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.tb1.Location = new System.Drawing.Point(144, 380);
-            this.tb1.Multiline = true;
-            this.tb1.Name = "tb1";
-            this.tb1.Size = new System.Drawing.Size(129, 71);
-            this.tb1.TabIndex = 0;
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label6.BackColor = System.Drawing.Color.Transparent;
             this.label6.Font = new System.Drawing.Font("MS UI Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.label6.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label6.Location = new System.Drawing.Point(765, 59);
+            this.label6.Location = new System.Drawing.Point(772, 43);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(66, 27);
             this.label6.TabIndex = 2;
@@ -218,134 +206,105 @@ namespace WeatherApp {
             // 
             // tbGaikyou
             // 
-            this.tbGaikyou.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.tbGaikyou.Location = new System.Drawing.Point(795, 105);
+            this.tbGaikyou.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.tbGaikyou.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.tbGaikyou.Location = new System.Drawing.Point(777, 88);
             this.tbGaikyou.Multiline = true;
             this.tbGaikyou.Name = "tbGaikyou";
-            this.tbGaikyou.Size = new System.Drawing.Size(425, 531);
+            this.tbGaikyou.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.tbGaikyou.Size = new System.Drawing.Size(450, 451);
             this.tbGaikyou.TabIndex = 0;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label7.BackColor = System.Drawing.Color.Transparent;
             this.label7.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.label7.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label7.Location = new System.Drawing.Point(12, 358);
+            this.label7.Location = new System.Drawing.Point(293, 148);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(126, 24);
             this.label7.TabIndex = 2;
             this.label7.Text = "明日の天気";
             // 
-            // tb2
+            // toMax
             // 
-            this.tb2.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.tb2.Location = new System.Drawing.Point(143, 516);
-            this.tb2.Multiline = true;
-            this.tb2.Name = "tb2";
-            this.tb2.Size = new System.Drawing.Size(130, 58);
-            this.tb2.TabIndex = 0;
+            this.toMax.AutoSize = true;
+            this.toMax.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.toMax.ForeColor = System.Drawing.Color.Red;
+            this.toMax.Location = new System.Drawing.Point(25, 380);
+            this.toMax.Name = "toMax";
+            this.toMax.Size = new System.Drawing.Size(106, 24);
+            this.toMax.TabIndex = 2;
+            this.toMax.Text = "最高気温";
             // 
-            // label9
+            // tomoMin
             // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label9.ForeColor = System.Drawing.Color.Red;
-            this.label9.Location = new System.Drawing.Point(512, 240);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(106, 24);
-            this.label9.TabIndex = 2;
-            this.label9.Text = "最高気温";
+            this.tomoMin.AutoSize = true;
+            this.tomoMin.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.tomoMin.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.tomoMin.Location = new System.Drawing.Point(304, 285);
+            this.tomoMin.Name = "tomoMin";
+            this.tomoMin.Size = new System.Drawing.Size(106, 24);
+            this.tomoMin.TabIndex = 2;
+            this.tomoMin.Text = "最低気温";
             // 
-            // label8
+            // tomoMax
             // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label8.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.label8.Location = new System.Drawing.Point(282, 393);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(106, 24);
-            this.label8.TabIndex = 2;
-            this.label8.Text = "最低気温";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label10.ForeColor = System.Drawing.Color.Red;
-            this.label10.Location = new System.Drawing.Point(512, 391);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(106, 24);
-            this.label10.TabIndex = 2;
-            this.label10.Text = "最高気温";
+            this.tomoMax.AutoSize = true;
+            this.tomoMax.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.tomoMax.ForeColor = System.Drawing.Color.Red;
+            this.tomoMax.Location = new System.Drawing.Point(304, 380);
+            this.tomoMax.Name = "tomoMax";
+            this.tomoMax.Size = new System.Drawing.Size(106, 24);
+            this.tomoMax.TabIndex = 2;
+            this.tomoMax.Text = "最高気温";
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label11.BackColor = System.Drawing.Color.Transparent;
             this.label11.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.label11.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label11.Location = new System.Drawing.Point(13, 178);
+            this.label11.Location = new System.Drawing.Point(25, 148);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(126, 24);
             this.label11.TabIndex = 2;
             this.label11.Text = "今日の天気";
             // 
-            // tb0
+            // tomo2Min
             // 
-            this.tb0.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.tb0.Location = new System.Drawing.Point(135, 224);
-            this.tb0.Multiline = true;
-            this.tb0.Name = "tb0";
-            this.tb0.Size = new System.Drawing.Size(130, 67);
-            this.tb0.TabIndex = 0;
+            this.tomo2Min.AutoSize = true;
+            this.tomo2Min.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.tomo2Min.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.tomo2Min.Location = new System.Drawing.Point(589, 285);
+            this.tomo2Min.Name = "tomo2Min";
+            this.tomo2Min.Size = new System.Drawing.Size(106, 24);
+            this.tomo2Min.TabIndex = 2;
+            this.tomo2Min.Text = "最低気温";
             // 
-            // label12
+            // tomo2Max
             // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label12.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.label12.Location = new System.Drawing.Point(282, 537);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(106, 24);
-            this.label12.TabIndex = 2;
-            this.label12.Text = "最低気温";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label13.ForeColor = System.Drawing.Color.Red;
-            this.label13.Location = new System.Drawing.Point(512, 537);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(106, 24);
-            this.label13.TabIndex = 2;
-            this.label13.Text = "最高気温";
-            // 
-            // pb1
-            // 
-            this.pb1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pb1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pb1.ErrorImage = null;
-            this.pb1.Location = new System.Drawing.Point(145, 162);
-            this.pb1.Name = "pb1";
-            this.pb1.Size = new System.Drawing.Size(130, 56);
-            this.pb1.TabIndex = 4;
-            this.pb1.TabStop = false;
+            this.tomo2Max.AutoSize = true;
+            this.tomo2Max.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.tomo2Max.ForeColor = System.Drawing.Color.Red;
+            this.tomo2Max.Location = new System.Drawing.Point(589, 380);
+            this.tomo2Max.Name = "tomo2Max";
+            this.tomo2Max.Size = new System.Drawing.Size(106, 24);
+            this.tomo2Max.TabIndex = 2;
+            this.tomo2Max.Text = "最高気温";
             // 
             // pb2
             // 
-            this.pb2.Location = new System.Drawing.Point(144, 318);
+            this.pb2.Location = new System.Drawing.Point(302, 188);
             this.pb2.Name = "pb2";
-            this.pb2.Size = new System.Drawing.Size(130, 56);
+            this.pb2.Size = new System.Drawing.Size(117, 56);
             this.pb2.TabIndex = 4;
             this.pb2.TabStop = false;
             // 
             // pb3
             // 
-            this.pb3.Location = new System.Drawing.Point(157, 457);
+            this.pb3.Location = new System.Drawing.Point(593, 184);
             this.pb3.Name = "pb3";
             this.pb3.Size = new System.Drawing.Size(116, 56);
             this.pb3.TabIndex = 4;
@@ -355,7 +314,7 @@ namespace WeatherApp {
             // 
             this.lb1.AutoSize = true;
             this.lb1.Font = new System.Drawing.Font("MS UI Gothic", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lb1.Location = new System.Drawing.Point(618, 233);
+            this.lb1.Location = new System.Drawing.Point(47, 432);
             this.lb1.Name = "lb1";
             this.lb1.Size = new System.Drawing.Size(0, 33);
             this.lb1.TabIndex = 5;
@@ -364,7 +323,7 @@ namespace WeatherApp {
             // 
             this.lb2.AutoSize = true;
             this.lb2.Font = new System.Drawing.Font("MS UI Gothic", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lb2.Location = new System.Drawing.Point(388, 384);
+            this.lb2.Location = new System.Drawing.Point(331, 336);
             this.lb2.Name = "lb2";
             this.lb2.Size = new System.Drawing.Size(0, 33);
             this.lb2.TabIndex = 6;
@@ -373,7 +332,7 @@ namespace WeatherApp {
             // 
             this.lb3.AutoSize = true;
             this.lb3.Font = new System.Drawing.Font("MS UI Gothic", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lb3.Location = new System.Drawing.Point(618, 386);
+            this.lb3.Location = new System.Drawing.Point(316, 432);
             this.lb3.Name = "lb3";
             this.lb3.Size = new System.Drawing.Size(15, 33);
             this.lb3.TabIndex = 7;
@@ -383,7 +342,7 @@ namespace WeatherApp {
             // 
             this.lb4.AutoSize = true;
             this.lb4.Font = new System.Drawing.Font("MS UI Gothic", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lb4.Location = new System.Drawing.Point(388, 530);
+            this.lb4.Location = new System.Drawing.Point(616, 336);
             this.lb4.Name = "lb4";
             this.lb4.Size = new System.Drawing.Size(0, 33);
             this.lb4.TabIndex = 8;
@@ -392,98 +351,197 @@ namespace WeatherApp {
             // 
             this.lb5.AutoSize = true;
             this.lb5.Font = new System.Drawing.Font("MS UI Gothic", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lb5.Location = new System.Drawing.Point(618, 532);
+            this.lb5.Location = new System.Drawing.Point(607, 432);
             this.lb5.Name = "lb5";
             this.lb5.Size = new System.Drawing.Size(0, 33);
             this.lb5.TabIndex = 9;
             // 
+            // tmDOmax
+            // 
+            this.tmDOmax.AutoSize = true;
+            this.tmDOmax.Font = new System.Drawing.Font("MS UI Gothic", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.tmDOmax.ForeColor = System.Drawing.Color.Red;
+            this.tmDOmax.Location = new System.Drawing.Point(366, 404);
+            this.tmDOmax.Name = "tmDOmax";
+            this.tmDOmax.Size = new System.Drawing.Size(44, 71);
+            this.tmDOmax.TabIndex = 7;
+            this.tmDOmax.Text = "\r\n℃";
+            this.tmDOmax.UseCompatibleTextRendering = true;
+            // 
+            // tm2DOmax
+            // 
+            this.tm2DOmax.AutoSize = true;
+            this.tm2DOmax.Font = new System.Drawing.Font("MS UI Gothic", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.tm2DOmax.ForeColor = System.Drawing.Color.Red;
+            this.tm2DOmax.Location = new System.Drawing.Point(651, 404);
+            this.tm2DOmax.Name = "tm2DOmax";
+            this.tm2DOmax.Size = new System.Drawing.Size(44, 71);
+            this.tm2DOmax.TabIndex = 7;
+            this.tm2DOmax.Text = "\r\n℃";
+            this.tm2DOmax.UseCompatibleTextRendering = true;
+            // 
+            // tm2DOmin
+            // 
+            this.tm2DOmin.AutoSize = true;
+            this.tm2DOmin.Font = new System.Drawing.Font("MS UI Gothic", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.tm2DOmin.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.tm2DOmin.Location = new System.Drawing.Point(651, 309);
+            this.tm2DOmin.Name = "tm2DOmin";
+            this.tm2DOmin.Size = new System.Drawing.Size(44, 71);
+            this.tm2DOmin.TabIndex = 7;
+            this.tm2DOmin.Text = "\r\n℃";
+            this.tm2DOmin.UseCompatibleTextRendering = true;
+            // 
+            // tmDOmin
+            // 
+            this.tmDOmin.AutoSize = true;
+            this.tmDOmin.Font = new System.Drawing.Font("MS UI Gothic", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.tmDOmin.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.tmDOmin.Location = new System.Drawing.Point(366, 309);
+            this.tmDOmin.Name = "tmDOmin";
+            this.tmDOmin.Size = new System.Drawing.Size(44, 71);
+            this.tmDOmin.TabIndex = 7;
+            this.tmDOmin.Text = "\r\n℃";
+            this.tmDOmin.UseCompatibleTextRendering = true;
+            // 
+            // tDOmax
+            // 
+            this.tDOmax.AutoSize = true;
+            this.tDOmax.Font = new System.Drawing.Font("MS UI Gothic", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.tDOmax.ForeColor = System.Drawing.Color.Red;
+            this.tDOmax.Location = new System.Drawing.Point(88, 404);
+            this.tDOmax.Name = "tDOmax";
+            this.tDOmax.Size = new System.Drawing.Size(44, 71);
+            this.tDOmax.TabIndex = 7;
+            this.tDOmax.Text = "\r\n℃";
+            this.tDOmax.UseCompatibleTextRendering = true;
+            // 
+            // toMin
+            // 
+            this.toMin.AutoSize = true;
+            this.toMin.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.toMin.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.toMin.Location = new System.Drawing.Point(26, 285);
+            this.toMin.Name = "toMin";
+            this.toMin.Size = new System.Drawing.Size(106, 24);
+            this.toMin.TabIndex = 2;
+            this.toMin.Text = "最低気温";
+            // 
+            // toDOmin
+            // 
+            this.toDOmin.AutoSize = true;
+            this.toDOmin.Font = new System.Drawing.Font("MS UI Gothic", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.toDOmin.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.toDOmin.Location = new System.Drawing.Point(88, 309);
+            this.toDOmin.Name = "toDOmin";
+            this.toDOmin.Size = new System.Drawing.Size(44, 71);
+            this.toDOmin.TabIndex = 7;
+            this.toDOmin.Text = "\r\n℃";
+            this.toDOmin.UseCompatibleTextRendering = true;
+            // 
+            // lb0
+            // 
+            this.lb0.AutoSize = true;
+            this.lb0.Font = new System.Drawing.Font("MS UI Gothic", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lb0.Location = new System.Drawing.Point(63, 336);
+            this.lb0.Name = "lb0";
+            this.lb0.Size = new System.Drawing.Size(15, 33);
+            this.lb0.TabIndex = 7;
+            this.lb0.Text = "\r\n";
+            // 
+            // lbdate
+            // 
+            this.lbdate.AutoSize = true;
+            this.lbdate.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lbdate.Location = new System.Drawing.Point(138, 86);
+            this.lbdate.Name = "lbdate";
+            this.lbdate.Size = new System.Drawing.Size(90, 24);
+            this.lbdate.TabIndex = 10;
+            this.lbdate.Text = "     --   ";
+            // 
+            // lbtoday
+            // 
+            this.lbtoday.AutoSize = true;
+            this.lbtoday.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lbtoday.Location = new System.Drawing.Point(13, 247);
+            this.lbtoday.Name = "lbtoday";
+            this.lbtoday.Size = new System.Drawing.Size(49, 12);
+            this.lbtoday.TabIndex = 10;
+            this.lbtoday.Text = "     --   ";
+            // 
+            // lbtomo
+            // 
+            this.lbtomo.AutoSize = true;
+            this.lbtomo.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lbtomo.Location = new System.Drawing.Point(292, 247);
+            this.lbtomo.Name = "lbtomo";
+            this.lbtomo.Size = new System.Drawing.Size(49, 12);
+            this.lbtomo.TabIndex = 10;
+            this.lbtomo.Text = "     --   ";
+            // 
+            // lbtomo2
+            // 
+            this.lbtomo2.AutoSize = true;
+            this.lbtomo2.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lbtomo2.Location = new System.Drawing.Point(589, 247);
+            this.lbtomo2.Name = "lbtomo2";
+            this.lbtomo2.Size = new System.Drawing.Size(49, 12);
+            this.lbtomo2.TabIndex = 10;
+            this.lbtomo2.Text = "     --   ";
+            // 
+            // pb1
+            // 
+            this.pb1.Location = new System.Drawing.Point(29, 188);
+            this.pb1.Name = "pb1";
+            this.pb1.Size = new System.Drawing.Size(117, 56);
+            this.pb1.TabIndex = 4;
+            this.pb1.TabStop = false;
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("MS UI Gothic", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label2.ForeColor = System.Drawing.Color.Red;
-            this.label2.Location = new System.Drawing.Point(655, 358);
+            this.label2.Font = new System.Drawing.Font("MS UI Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label2.Location = new System.Drawing.Point(387, 42);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(44, 71);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "\r\n℃";
-            this.label2.UseCompatibleTextRendering = true;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("MS UI Gothic", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label14.ForeColor = System.Drawing.Color.Red;
-            this.label14.Location = new System.Drawing.Point(655, 505);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(44, 71);
-            this.label14.TabIndex = 7;
-            this.label14.Text = "\r\n℃";
-            this.label14.UseCompatibleTextRendering = true;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("MS UI Gothic", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label15.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.label15.Location = new System.Drawing.Point(418, 505);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(44, 71);
-            this.label15.TabIndex = 7;
-            this.label15.Text = "\r\n℃";
-            this.label15.UseCompatibleTextRendering = true;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("MS UI Gothic", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label16.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.label16.Location = new System.Drawing.Point(418, 351);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(44, 71);
-            this.label16.TabIndex = 7;
-            this.label16.Text = "\r\n℃";
-            this.label16.UseCompatibleTextRendering = true;
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("MS UI Gothic", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label17.ForeColor = System.Drawing.Color.Red;
-            this.label17.Location = new System.Drawing.Point(655, 213);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(44, 71);
-            this.label17.TabIndex = 7;
-            this.label17.Text = "\r\n℃";
-            this.label17.UseCompatibleTextRendering = true;
+            this.label2.Size = new System.Drawing.Size(188, 26);
+            this.label2.TabIndex = 11;
+            this.label2.Text = "※マーク欄の✘印は\r\n画像が見つからないことを示します。\r\n";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(1262, 681);
+            this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.ClientSize = new System.Drawing.Size(1250, 551);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lbtomo2);
+            this.Controls.Add(this.lbtomo);
+            this.Controls.Add(this.lbtoday);
+            this.Controls.Add(this.lbdate);
             this.Controls.Add(this.lb5);
             this.Controls.Add(this.lb4);
-            this.Controls.Add(this.label16);
-            this.Controls.Add(this.label15);
-            this.Controls.Add(this.label14);
-            this.Controls.Add(this.label17);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.toDOmin);
+            this.Controls.Add(this.tmDOmin);
+            this.Controls.Add(this.tm2DOmin);
+            this.Controls.Add(this.tm2DOmax);
+            this.Controls.Add(this.tDOmax);
+            this.Controls.Add(this.tmDOmax);
+            this.Controls.Add(this.lb0);
             this.Controls.Add(this.lb3);
             this.Controls.Add(this.lb2);
             this.Controls.Add(this.lb1);
             this.Controls.Add(this.pb3);
-            this.Controls.Add(this.pb2);
             this.Controls.Add(this.pb1);
+            this.Controls.Add(this.pb2);
             this.Controls.Add(this.cbSelect);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.label13);
-            this.Controls.Add(this.label10);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.label12);
-            this.Controls.Add(this.label8);
+            this.Controls.Add(this.tomo2Max);
+            this.Controls.Add(this.tomoMax);
+            this.Controls.Add(this.toMax);
+            this.Controls.Add(this.tomo2Min);
+            this.Controls.Add(this.toMin);
+            this.Controls.Add(this.tomoMin);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label5);
@@ -491,17 +549,13 @@ namespace WeatherApp {
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btWeatherGET);
             this.Controls.Add(this.tbGaikyou);
-            this.Controls.Add(this.tb2);
-            this.Controls.Add(this.tb0);
-            this.Controls.Add(this.tb1);
-            this.Controls.Add(this.tbNitiji);
             this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "天気アプリ";
             this.TopMost = true;
-            ((System.ComponentModel.ISupportInitialize)(this.pb1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -512,22 +566,17 @@ namespace WeatherApp {
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cbSelect;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox tbNitiji;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox tb1;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox tbGaikyou;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox tb2;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label toMax;
+        private System.Windows.Forms.Label tomoMin;
+        private System.Windows.Forms.Label tomoMax;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox tb0;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.PictureBox pb1;
+        private System.Windows.Forms.Label tomo2Min;
+        private System.Windows.Forms.Label tomo2Max;
         private System.Windows.Forms.PictureBox pb2;
         private System.Windows.Forms.PictureBox pb3;
         private System.Windows.Forms.Label lb1;
@@ -535,11 +584,20 @@ namespace WeatherApp {
         private System.Windows.Forms.Label lb3;
         private System.Windows.Forms.Label lb4;
         private System.Windows.Forms.Label lb5;
+        private System.Windows.Forms.Label tmDOmax;
+        private System.Windows.Forms.Label tm2DOmax;
+        private System.Windows.Forms.Label tm2DOmin;
+        private System.Windows.Forms.Label tmDOmin;
+        private System.Windows.Forms.Label tDOmax;
+        private System.Windows.Forms.Label toMin;
+        private System.Windows.Forms.Label toDOmin;
+        private System.Windows.Forms.Label lb0;
+        private System.Windows.Forms.Label lbdate;
+        private System.Windows.Forms.Label lbtoday;
+        private System.Windows.Forms.Label lbtomo;
+        private System.Windows.Forms.Label lbtomo2;
+        private System.Windows.Forms.PictureBox pb1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.Label label17;
     }
 }
 
