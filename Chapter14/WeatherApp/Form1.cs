@@ -24,14 +24,16 @@ namespace WeatherApp {
         public Form1() {
             InitializeComponent();
 
-            cbSelect.SelectedItem = "群馬県";
+            cbSelect.SelectedItem = "群馬県";         
+
         }
 
         private void btWeatherGET_Click(object sender, EventArgs e) {
 
+
+
             if (cbSelect.SelectedItem == null) {
-                MessageBox.Show("地域を選択してください。地域が選択されていない場合は、" +
-                    "宗谷地方の情報を表示します。"
+                MessageBox.Show("地域を選択してください。"
                     , "エラー",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
@@ -60,12 +62,12 @@ namespace WeatherApp {
             }
             catch (Exception) {
 
-                MessageBox.Show("ネットワークに接続してください。","エラー",
-                   MessageBoxButtons.OK,
-                   MessageBoxIcon.Error);
+                MessageBox.Show("天気情報を取得できませんでした。情報が存在していない可能性があります。インターネットに接続されていない場合は、接続してください。"
+                    + "午前11時以前の場合、一部取得できない情報があるため、それを除いた情報を表示します。",
+                    "エラー",
+              MessageBoxButtons.OK,
+              MessageBoxIcon.Error);
             }
-           
-
         }
 
         private void Weather_info(Class1[] json, Rootobject_t json2, Rootobject_p jsonp) {
@@ -75,13 +77,14 @@ namespace WeatherApp {
                 lbtoday.Text = json[0].timeSeries[0].areas[0].weathers[0];
                 lbtomo.Text = json[0].timeSeries[0].areas[0].weathers[1];
                 lbtomo2.Text =json[0].timeSeries[0].areas[0].weathers[2];
+                lb0.Text = "-";
                 lb1.Text = json[0].timeSeries[2].areas[0].temps[0];
                 lb2.Text = json[0].timeSeries[2].areas[0].temps[2];
                 lb3.Text = json[0].timeSeries[2].areas[0].temps[3];
                 lb4.Text = json[1].timeSeries[1].areas[0].tempsMin[1];
                 lb5.Text = json[1].timeSeries[1].areas[0].tempsMax[1];
-                tbGaikyou.Text = json2.text;
-                lb0.Text = "-";
+                label2.Text = json2.text;
+               
 
                 weathercode1 = json[0].timeSeries[0].areas[0].weatherCodes[0];
                 weathercode2 = json[0].timeSeries[0].areas[0].weatherCodes[1];
@@ -91,7 +94,7 @@ namespace WeatherApp {
                 pb2.ImageLocation = "https://www.jma.go.jp/bosai/forecast/img/" + weathercode2 + ".png";
                 pb3.ImageLocation = "https://www.jma.go.jp/bosai/forecast/img/" + weathercode3 + ".png";
 
-               
+                label8.Text = "※一部の天気マークが取得できない場合があります。";
             }
             catch (Exception) {
 
@@ -105,7 +108,7 @@ namespace WeatherApp {
                 lb3.Text = json[0].timeSeries[2].areas[0].temps[3];
                 lb4.Text = json[1].timeSeries[1].areas[0].tempsMin[1];
                 lb5.Text = json[1].timeSeries[1].areas[0].tempsMax[1];
-                tbGaikyou.Text = json2.text;
+                label2.Text = json2.text;
 
                 weathercode1 = json[0].timeSeries[0].areas[0].weatherCodes[0];
                 weathercode2 = json[0].timeSeries[0].areas[0].weatherCodes[1];
@@ -114,12 +117,11 @@ namespace WeatherApp {
                 pb1.ImageLocation = "https://www.jma.go.jp/bosai/forecast/img/" + weathercode1 + ".png";
                 pb2.ImageLocation = "https://www.jma.go.jp/bosai/forecast/img/" + weathercode2 + ".png";
                 pb3.ImageLocation = "https://www.jma.go.jp/bosai/forecast/img/" + weathercode3 + ".png";
+
+              
             }
+         
         }
-
-    
-
-
 
         private void URLSelect() {
 
@@ -234,6 +236,10 @@ namespace WeatherApp {
                 url2 = "https://www.jma.go.jp/bosai/forecast/data/overview_forecast/150000.json";
             }
             if (cbSelect.SelectedItem.ToString() == "富山県") {
+                url = "https://www.jma.go.jp/bosai/forecast/data/forecast/160000.json";
+                url2 = "https://www.jma.go.jp/bosai/forecast/data/overview_forecast/160000.json";
+            }
+            if (cbSelect.SelectedItem.ToString() == "石川県") {
                 url = "https://www.jma.go.jp/bosai/forecast/data/forecast/170000.json";
                 url2 = "https://www.jma.go.jp/bosai/forecast/data/overview_forecast/170000.json";
             }
